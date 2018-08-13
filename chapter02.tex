@@ -1,0 +1,814 @@
+% Marieke Kuijjer
+% 2013-02-15
+% chapter 02
+
+	%\documentclass[12pt,b5paper]{book}
+	%\setcounter{secnumdepth}{0}
+	%\setcounter{tocdepth}{1}
+	%\usepackage[hidelinks]{hyperref}
+
+%\begin{document}
+
+%%% title page
+
+\chapter{Genome\hyp{}wide analyses on high-grade osteosarcoma: making sense of a genomically most unstable tumor}\label{ch2}
+\thispagestyle{empty}				%%% to remove page number from first page of chapter, must be placed after calling the chapter
+
+\vfill
+
+\vspace{0.5cm}
+This chapter is based on the review:
+\underline{Kuijjer ML}, Hogendoorn PCW, Cleton-Jansen AM. \emph{Int J Cancer}. 2013 Feb 22;Epub
+
+\newpage
+
+%%% main document
+
+%
+\section{Abstract}\label{abstract2}
+High-grade osteosarcoma is an extremely genomically unstable tumor. This, together with other challenges, such as the
+heterogeneity within and between tumor samples, and the rarity of the disease, renders it difficult to study this tumor on a
+genome\hyp{}wide level. Now that most laboratories change from genome\hyp{}wide microarray experiments to Next\hyp{}Generation
+Sequencing it is important to discuss the lessons we have learned from microarray studies. In this review, we discuss the
+challenges of high\hyp{}grade osteosarcoma data analysis. We give an overview of microarray studies that have been conducted so far on both osteosarcoma tissue samples and cell lines. We discuss recent findings from integration of different data types,
+which is particularly relevant in a tumor with such a complex genomic profile. Finally, we elaborate on the
+translation of results obtained with bioinformatics into functional studies, which has lead to valuable findings, especially
+when keeping in mind that no new therapies with a significant impact on survival have been developed in the past decades.
+
+%
+\section{Introduction}\label{introduction2}
+\subsection{High-grade osteosarcoma, a rare, genomically complex and unstable tumor}
+High-grade osteosarcoma is the most prevalent primary malignant
+bone tumor. The disease occurs most often in children
+and adolescents and is the sixth leading cause of death
+in children under the age of 15 years. Notwithstanding,
+osteosarcoma is a rare disease, with an incidence of five to
+ten new cases per $1,000,000$ per year~\cite{fletcher1994cytogenetic,raymond2002conventional}. Osteosarcoma is
+composed of extremely genomically complex and unstable
+mesenchymal tumor cells, generally exhibiting both complex
+clonal and numerous nonclonal aberrations~\cite{fletcher1994cytogenetic}, which are characterized
+by the direct production of osteoid~\cite{raymond2002conventional,helman2003mechanisms}. The tumor is
+highly aggressive, with distant metastases developing in
+approximately 45\% of all patients~\cite{pakos2009prognostic} although patients are
+treated with intensive neoadjuvant treatment consisting of
+high doses of multiple chemotherapeutic drugs. Better surgery
+has improved survival slightly but no other significant
+improvement has been made since decades, and increasing
+dose or the administration of more than three chemotherapeutic
+regimens does not increase overall
+survival~\cite{lewis2007improvement,eselgrim2006dose,anninga2011chemotherapeutic}. Hence, new
+therapeutics are seriously needed. Studying the tumor
+biology and pathology in a systematic manner can result in a
+better understanding of osteosarcomagenesis and can potentially
+identify new targets for treatment.
+
+\subsection{Caveats and challenges}
+Several challenges and caveats are encountered when studying
+a rare, highly genomically unstable tumor on a genome\hyp{}wide
+level. The first challenge is apparent when collecting
+osteosarcoma tumor samples. Osteosarcoma is a rare disease
+and therefore often large interinstitutional efforts have to be
+achieved to collect the substantial amount of samples that is
+needed for analyses in computational biology. For most purposes,
+studying osteosarcoma pretreatment diagnostic biopsies
+is preferred over using resection material of the primary
+tumor. Presurgery chemotherapy causes substantial necrosis,
+even in poor responders, thereby rendering the tissue unsuitable
+for high quality nucleic acid retrieval. Moreover, biopsies
+are more representative of the state of the tumor before any
+treatment as chemotherapy changes the distribution of subclones
+present in the primary tumor, and can cause clonal
+evolution~\cite{ding2012clonal}. Biopsies are taken to establish a histopathological
+diagnosis, and are unfortunately often very small and not
+always available for research. In addition, material is often
+collected retrospectively, which can introduce heterogeneity
+owing to, for example, different treatment procedures, unless
+patients are collected who have been enrolled in the same
+clinical trial. Thus, the collection of clinical data and the
+grouping of clinical parameters have to be carried out very
+carefully. For a rare entity such as osteosarcoma, collaborations
+are indispensable to collect significant cohorts, an
+example of this being the European Network of Excellence
+EuroBoNeT, in which various European institutes collaborated
+to collect a large, homogeneous set of, among other
+bone tumors, high\hyp{}grade osteosarcoma biopsies.
+
+Primary osteosarcoma is subdivided into numerous different
+low- and high\hyp{}grade subtypes~\cite{mohseny2008bone}. In this review, we concentrate
+on high\hyp{}grade conventional osteosarcoma, which is by
+far the most prevalent variant. Although there is often intratumor
+heterogeneity, high\hyp{}grade conventional osteosarcoma
+can be grouped into various histological subtypes, based on
+the produced extracellular matrix of the tumor~\cite{mohseny2008bone}. Osteoblastic,
+chondroblastic and fibroblastic osteosarcoma are the most
+common histological subtypes of high\hyp{}grade conventional osteosarcoma.
+Some correlation of the distinct histological subtypes
+to specific clinical outcomes has been observed~\cite{hauben2002does,hauben2006clinico} and
+it may thus be difficult to collect a homogeneous set of samples.
+In fact, often it is not clearly described which exact histological
+subtypes are used in a specific study, and in what
+percentages these subtypes are present in the data set. In
+addition, the subclassification is hindered by the occurrence
+of mixed cases containing two different matrix types. Nonetheless,
+a concordance of 98\% has been found between the
+histological subtype of osteosarcoma biopsies and the corresponding
+resections~\cite{hauben2002does}.
+
+A general problem in studying tumor cell biology is that
+the true cell of origin is often not defined, rendering it difficult
+to select a representative control tissue or control cells.
+Osteosarcoma cells are osteoblast\hyp{}like cells of mesenchymal
+origin. Of the different histological subtypes that exist, multiple
+subtypes can be present within a single tumor. Considering
+the differentiation capacity of the mesenchymal stem cell
+(MSC), this cell type is the most probable candidate for being
+the osteosarcoma progenitor~\cite{mohseny2011concise,bovee2003skeletogenesis}. It was recently found that
+osteosarcoma tumors can be spontaneously formed when
+mouse MSCs are transferred into mice~\cite{tolar2006sarcoma,mohseny2009osteosarcoma} and zebrafish~\cite{mohseny2012osteosarcomazebrafish,mohseny2012osteosarcomamodels}.
+This does, however, not exclude osteoblasts as putative progenitor
+cells, as osteoblasts might redifferentiate into the
+primitive osteoblast\hyp{}like tumor cells of osteosarcoma.
+
+\subsection{Osteosarcoma models}
+As collecting fresh frozen osteosarcoma tumor samples can
+be a challenge, performing analyses on data derived from osteosarcoma
+cell lines or xenografts may be a good alternative~\cite{mohseny2012osteosarcomamodels}. Osteosarcoma cell lines are frequently used in
+biological studies, because they generally grow fast and are
+easy to maintain in culture and hence osteosarcoma cell lines
+are easily available. One caveat of using cell cultures is that
+slight differences in culture conditions, for example the percentage
+of cells in the culture dish or flask, or the medium
+that is used, can lead to significant differences in protein
+expression or signal transduction pathway activities, and
+these specific conditions may differ per cell line. Using a
+large panel of cell lines cultured under standard settings can
+overcome this problem. Cell culture may furthermore
+introduce additional mutations and genomic aberrations in
+the cell genome, because of selection based on the {\it in vitro}
+conditions~\cite{weinberg2007cells}, but in general, cell lines are reported to
+adequately represent the tumor from which they are derived.
+{\it In vitro}, they preserve the genetic aberrations of the parent
+tumor, while acquiring additional locus\hyp{}specific alterations~\cite{greshock2007cancer}.
+
+A panel of 19 osteosarcoma cell lines was recently characterized
+genetically by MLPA on 38 tumor suppressor gene
+loci~\cite{ottaviano2010molecular}. A screen for {\it TP53} mutations, {\it MDM2} amplification,
+{\it CDKN2A/B} deletion and genomic deletions of 38 additional
+tumor suppressor genes was performed on these cell lines. As
+three cell lines of this panel---HOS, 143B and MNNG-HOS---
+have common ancestry, we report the following percentages
+based on 17 cell lines. Homozygous deletion of the
+{\it CDKN2A/B} locus was detected in 35\%, whereas hemizygous
+deletion of this locus was found in 24\% of osteosarcoma cell
+lines. An additional homozygous deletion was found for
+{\it TP73} in one cell line. Mutation in {\it TP53} was detected in 41\%,
+whereas {\it MDM2} amplification was detected in 17\% of cell
+lines. These percentages are higher than those in osteosarcoma
+tumor tissues that are reported in the previously published
+literature~\cite{cleton2005central}, which may be explained by an advantage
+for primary tumor cells harboring such mutations to be effectively
+immortalized, or by the acquisition of additional mutations
+owing to long\hyp{}term culture. {\it MDM2} amplification and
+{\it TP53} mutations were mutually exclusive in this cell line
+panel. This has also been observed in osteosarcoma tumor
+data~\cite{overholtzer2003presence}. The differentiation capacity of this cell line panel has
+been determined as well~\cite{mohseny2011functional}. All 19 cell lines were able to differentiate
+toward at least one of the three tested---osteoblastic,
+chondroblastic and adipocytic---lineages. Most cell lines
+(14/19) could differentiate to at least two lineages, whereas
+3/19 cell lines had full differentiation capacity.
+
+{\it In vivo} osteosarcoma model systems include transplantation
+of a human tumor in mice~\cite{mayordomo2010tissue,kresse2011preclinical}, subcutaneous or orthotopically
+injections of osteosarcoma cells or late\hyp{}passage
+transformed MSCs into mice~\cite{mohseny2009osteosarcoma}
+or zebrafish~\cite{mohseny2012osteosarcomazebrafish}. Transgenic
+mouse models of osteosarcoma can be developed by overexpression
+of {\it c-fos}~\cite{ruther1989c}, or conditional inactivation of {\it TP53} and
+{\it RB1}~\cite{walkley2008conditional}. These different models have been shown to resemble
+osteosarcoma phenotypically~\cite{mohseny2009osteosarcoma,mohseny2012osteosarcomazebrafish,mohseny2011functional,mayordomo2010tissue,ruther1989c,walkley2008conditional,kuijjer2011mrna,kresse2011preclinical}. For example, subcutaneous
+and intramuscular injection of osteosarcoma cells
+in nude mice resulted in high\hyp{}grade sarcoma, resembling
+tumors which produced osteoid~\cite{mohseny2011functional} for 8/19 cells from the
+above\hyp{}described panel. The {\it in vivo} lineage\hyp{}specific differentiation
+capacity of these cells, however, was limited, reflecting
+the importance of stomal or microenvironmental stimulation
+for this process.
+
+As with cell lines, xenograft tumor cells may acquire additional
+changes owing to selection, and often, xenografts lose
+matrix after several passages~\cite{mayordomo2010tissue}. This will probably not have a
+significant effect on genomic profiles, but does influence
+expression and methylation patterns. High\hyp{}resolution microassay\hyp{}based array comparative genomic hybridization
+(aCGH) including nine osteosarcoma patient--xenograft pairs
+showed that genomes of human tumors transplanted into
+immunodeficient mice, which were repeatedly passaged in
+new mice, where comparable to genomes of their tumor of
+origin, with the acquisition of only a small number additional
+significant changes in the xenograft genomes~\cite{kresse2011preclinical}. Different
+microarray studies have shown that osteosarcoma cell lines
+and xenografts resemble the primary tumor from which they
+are derived. Gene expression profiling of a subset of the
+EuroBoNeT cell line panel, for which the original histological
+subtype of the primary tumor was known, and of osteosarcoma
+xenografts and pretreatment biopsies showed that,
+despite the lower amounts of matrix, histological subtypespecific
+mRNA signatures are retained in these model
+systems, and therefore may be a useful tool for expression
+analysis (Chapter~\ref{ch3},~\cite{kuijjer2011mrna}). Despite the similarities between genome and
+expression profiles of the model systems described above and
+the tumors of origin, the absence (cell lines) or lower
+amounts (xenografts) of stromal cells and extracellular
+matrix, the absence of interaction with the immune system
+(cell lines and some xenograft models) and the higher degree
+of clonality remain important limitations for studying tumor
+biology using these model systems.
+
+\subsection{Genome wide profiling to study osteosarcoma}
+In the next sections, we describe different methods to analyze
+specific types of microarray data, and give examples of
+how results from bioinformatics can be translated into functional
+studies. This review is not aiming to give a comprehensive
+overview of all genome\hyp{}wide studies on
+osteosarcoma, but rather illustrates and summarizes the
+major findings on DNA/RNA microarray reports. A summary
+of these findings is provided in Table~\ref{tab2.1}.
+%
+%%% OBS! references in this table are placed there by hand, as it would be difficult to place them here, but use text numbering
+\afterpage{
+	 \clearpage% flush all other floats
+	 \ifodd\value{page}
+%	\else% uncomment this else to get odd/even instead of even/odd
+	\expandafter\afterpage% put it on the next page if this one is odd
+	\fi
+    {
+\begin{landscape}
+	\centering
+	\footnotesize
+	\begin{singlespacing}
+		\begin{longtable}[c]{|>{\raggedright}p{0.7in} >{\raggedright}p{0.6in} >{\raggedright}p{1.35in} >{\raggedright}p{1.2in} >{\raggedright}p{2.0in} >{\raggedright}p{3.0in}|}
+		\hline
+		Analysis & Data type & Study & Osteosarcoma samples & Comparison & Pathway/genes\tabularnewline
+		\hline
+		Single-way & mRNA & Kuijjer {\it et al}.$^{28}$ & 76 B, 13 X, 18 C & Histological subtypes & NF$\upkappa$B in fibroblastic, chondroid\hyp{}matrix\hyp{}associated genes in chondroblastic osteosarcoma. Primary tumor expression signatures are preserved in model systems\tabularnewline
+		& & Buddingh {\it et al}.$^{30}$ & 53 B & Metastasis\hyp{}free survival & Macrophage\hyp{}associated genes correlate
+with better MFS\tabularnewline
+		& & Su {\it et al}.$^{31}$ & 3 C, 5 X & Capacity to metastasize & {\it IGFBP5} downregulation correlates with metastasis\tabularnewline
+		& & Naml{\o}s {\it et al}.$^{33}$ & 12 B/T, 11 M & Tumor sample type & Immunological processes and chemokine
+pattern upregulated in metastases\tabularnewline
+		& & Cleton-Jansen {\it et al}.$^{32}$ \\ Kuijjer {\it et al}.$^{28}$ & 25 B \\ 69 B & Response to chemotherapy & No significant differential expression\tabularnewline
+		& & Cleton-Jansen {\it et al}.$^{32}$ & 25 B & Control samples (osteoblastoma, MSC, osteoblast) &  Cell\hyp{}cycle regulation, DNA replication pathways\tabularnewline
+		& & Sadikovic {\it et al}.$^{42}$ & 6 B & Control sample (osteoblast) &  DNA replication network\tabularnewline
+		& & Kuijjer {\it et al}.$^{43}$ & 84 B & Control samples (MSC, osteoblast) &  Apoptosis, signal transduction\tabularnewline
+		& & Kansara {\it et al}.$^{44}$ & 5 C & Treatment with demethylating agent &  WIF1 methylation and downregulation\tabularnewline
+		& miRNA & Jones {\it et al}.$^{45}$ & 18 B & Control samples (normal bone) &  miR-16 Downregulation, miR-27a association with metastasis\tabularnewline
+		& CN & Kresse {\it et al}.$^{25}$ & 9 T/M and their derived xenografts &  Tumor sample type & Xenografts are representative for primary tumors although some additional aberrations are observed\tabularnewline
+		& & Squire {\it et al}.$^{50}$ \\ Man {\it et al}.$^{51}$ \\ Atiye {\it et al}.$^{52}$ \\ Yang {\it et al}.$^{53}$ \\ Kresse {\it et al}.$^{54}$ \\ Kuijjer {\it et al}.$^{43}$ \\ Lockwood {\it et al}.$^{55}$ \\ Yen {\it et al}.$^{56}$ \\ Smida {\it et al}.$^{58}$ \\ Pasic {\it et al}.$^{59}$ & 9B \\ 48 B/T/M \\ 22 C/TS/R \\ 20 B \\ 36 TS/M/X, 20 C \\ 32 B \\ 22 TS \\ 42 TS/R/M/C \\ 45 B \\ 27 B & Control samples & Overall high level of aneuploidy, which seems nonrandom. Regions described by three or more studies are gains on 1p, 6p, 8q, 12q and 17p and losses on 2q, 3q, 6q, 10, 13q and 17p\tabularnewline
+		& & Kuijjer {\it et al}.$^{43}$ \\ Smida {\it et al}.$^{58}$ & 32 B \\ 45 B &  Metastasis/event\hyp{}free survival & Genomic alterations are prognostic predictors\tabularnewline
+		& & Yen {\it et al}.$^{56}$ & 23 TS, 14 R/M & Tumor sample type & Identified deletions/amplifications which differ between TS and R/M\tabularnewline
+		& & Kresse {\it et al}.$^{54}$ \\ Yen {\it et al}.$^{56}$ \\ Pasic {\it et al}.$^{59}$ & 36 TS/M/X, 20 C \\ 42 TS/R/M/C \\ 27 B & Control samples & Frequent deletion of {\it LSAMP}\tabularnewline
+		& & Yang {\it et al}.$^{53}$ & 20 B & Control samples & Enrichment of VEGF pathway\tabularnewline
+		Integrative & CN, mRNA & Kuijjer {\it et al}.$^{43}$ & 29 B & Control samples (MSC, osteoblast) & Set of 31 candidate drivers enriched in genes with a role in genomic instability\tabularnewline
+		& & Lockwood {\it et al}.$^{55}$ & 22 TS, 8 X & Control samples (normal tissues) & Amplification and overexpression of cyclin E3\tabularnewline
+		& miRNA, mRNA & Jones {\it et al}.$^{45}$ & 14 B & Control samples (normal bone) & Transcriptional regulation, cell cycle control and cancer signaling\tabularnewline
+		& & Naml{\o}s {\it et al}.$^{46}$ & 19 C & Control samples (normal bone) & Pairs of miRNAs with 26 mRNAs\tabularnewline
+		& CN, mRNA, methylation & Sadikovic {\it et al}.$^{48}$ & 2 C & Control sample (osteoblast) & Hypomethylation of genes connected to c-Myc\tabularnewline
+		& & Sadikovic {\it et al}.$^{42}$ & 5 B & Control sample (osteoblast) & RUNX2 amplification and overexpression, {\it DOCK5} and {\it TNFRSF10A/D} loss and underexpression, hypomethylation, gain and overexpression of histone cluster 2 genes\tabularnewline
+		& & Kresse {\it et al}.$^{49}$ & 19 C & Control samples (osteoblast, normal bone) & 350 genes with two aberration types, including {\it RUNX2} and {\it DLX5} amplification and overexpression\tabularnewline
+		\hline
+		\caption{Overview of genome\hyp{}wide data analyses in high\hyp{}grade osteosarcoma. The table gives an overview of single\hyp{}way and integrative analyses described in this review. For each study, the sample type and sample size is given under Osteosarcoma samples column and the comparison which is made in the bioinformatics analysis, for example, comparison with control tissue, is shown in the Comparison column. Several studies used different sample types in one group. When this was done, these sets are shown in the table as combined into one group as well. Groups of different sample types which have been used in separate analyses are shown as different groups. Not always, it is clear whether na{\"i}ve tumor biopsies, untreated primary tumor resections or resections of treated primary tumors were used. For such studies, we have used the abbreviation TS (for tumor sample). B: na{\"i}ve tumor biopsies, T: resections of primary tumors, R: resections of recurrences, M: metastatic resections, C: cell lines, X: xenografts.}
+		\label{tab2.1}
+		\end{longtable}
+	\end{singlespacing}
+\end{landscape}
+}
+}
+%
+With the
+purpose to review bioinformatic analyses on osteosarcoma,
+we only review studies where at least three samples were
+included, and only refer to articles where robust statistical
+analyses have been applied.
+
+%
+\section{Single platform analyses of osteosarcoma genome\hyp{}wide data}\label{single2}
+\subsection{Different approaches for single\hyp{}way analyses}
+In a typical supervised genome\hyp{}wide data analysis, significant
+differences, for example significantly differentially expressed
+genes/miRNAs or differential methylation, are determined
+between two or more groups of samples. These groups can
+exist of different clinical parameters, of tumor samples and
+their nontumorigenic counterpart or of experimentally
+induced and noninduced samples as shown in Figure~\ref{fig2.1}.
+%
+\begin{figure}[htbp]
+  \centering
+    \includegraphics[width=1\textwidth]{figs02/fig1bw.pdf}	% pdf version also bw
+    \caption{Different supervised comparisons in genome\hyp{}wide data
+analysis. Flow chart describing single\hyp{}way bioinformatic analyses
+that are most typically performed on genome\hyp{}wide data. For mRNA,
+miRNA and methylation data analysis, the comparative analysis
+usually exists of tumor samples versus nontumorigenic counterparts,
+of different groups of tumor samples, defined by clinical parameters
+or samples which are experimentally altered compared to
+samples which are not, although tumor samples of a specific
+group are also sometimes compared to a pool of all samples (not
+illustrated in this figure). Copy number data are most often compared
+to a reference set, which may be an in-house, or a public
+reference set, and which does not have to consist of the nontumorigenic
+counterpart of the tumor that is studied. Additional comparative
+analyses may determine the differences between different
+subgroups within the samples that are studied. Although for
+mRNA, miRNA and methylation data, often significant differential
+expression/methylation is returned by statistical tests, for copy
+number data researchers mostly look at frequency of the aberration
+in the studied groups.}
+     \label{fig2.1}
+\end{figure}
+%
+Copy
+number profiling data are analyzed somewhat differently, as
+copy number profiles of tumor samples do not necessarily
+have to be compared to their specific nontumorigenic counterparts,
+but can be compared to, for example, a public reference
+set, such as HapMap samples~\cite{gibbs2003international}. Usually, a cutoff for
+frequency is used to determine whether an amplification or
+deletion is recurrently present in a specific region. Unsupervised
+analysis, on the other hand, can give information on
+quality of the data, and on whether there are certain subgroups
+within the tumor samples that behave differently.
+
+Each of these distinct ways to analyze genome\hyp{}wide data
+has been applied to high\hyp{}grade osteosarcoma data sets. An
+overview of these different approaches in osteosarcoma on
+gene expression, microRNA (miRNA), methylation and copy
+number data is given in the following paragraphs. Functional
+verification of the results obtained with these studies will be
+discussed in a later section of this review.
+
+\subsection{Genome\hyp{}wide gene expression data, comparison of clinical parameters}
+Comparisons between different clinical subgroups of osteosarcoma
+have resulted in a prediction profile that can classify
+the main histological subtypes of conventional high\hyp{}grade osteosarcoma
+in biopsy material, but also in cell lines and in
+osteosarcoma xenografts (Chapter~\ref{ch3},~\cite{kuijjer2011mrna}). Protein interaction networks illustrated
+that chondroid matrix\hyp{}associated proteins were overexpressed
+in chondroblastic osteosarcoma, whereas NF$\upkappa$B--STAT5
+signaling showed higher expression in fibroblastic osteosarcoma.
+The absence of a specific network for osteoblastic
+osteosarcoma indicates that the features of the main osteoblast\hyp{}like
+cell and of the osteoid matrix are present in tumors
+of all three main histological subtypes.
+
+A second example of a comparison between different clinical
+parameters is the comparison of samples with different
+outcomes in event\hyp{}free survival or overall survival. It is important
+to note that when designing an analysis for such a
+study, a uniform set of clinical follow\hyp{}up parameters should
+be employed, instead of directly comparing patients with or
+without metastases, or patients who are alive or deceased. In
+one study, differential expression was determined between biopsy
+material of patients developing metastases within 5
+years and patients who did not develop metastases within
+this time frame. This study demonstrated that, in osteosarcoma,
+an expression profile associated with macrophages correlated
+with better overall survival (Chapter~\ref{ch4},~\cite{buddingh2011tumor}). To identify genes
+playing a role in metastasis, comparisons between osteosarcoma
+cell lines that can or cannot metastasize upon passaging
+into mice have also been made. A recent study identified
+downregulation of {\it IGFBP5}, or insulin\hyp{}like growth factor
+binding protein 5, in the metastatic cell line MG63.2 and in
+tumors derived from this cell line~\cite{su2011insulin}. Interestingly, this gene
+was also significantly downregulated in our analysis, comparing
+osteosarcoma biopsies with control tissues~\cite{cleton2009profiling}). Metastasis
+progression can be studied by comparing metastatic resections
+to the primary tumor. This has been performed in one
+study, where higher expression of genes involved in immunological
+processes was detected in the metastasis samples~\cite{namlos2012global}.
+This may correlate with our findings that more CD14\textsuperscript{+} cells
+are present in metastatic lesions than in pretreatment
+biopsies~\cite{buddingh2011tumor}.
+
+Another important clinical parameter that has been studied
+in human osteosarcoma is response to chemotherapy,
+which is predictive for overall survival~\cite{bacci1998predictive,huvos1991bone,bacci2006prognostic}. Differentially
+expressed genes discriminating between good and poor responders
+to chemotherapy have been detected by different
+groups, but with little consensus in the gene lists. Most studies
+did not use robust statistics with correction for multiple
+testing, a shortcoming that is too often seen in biomedical
+research~\cite{dupuy2007critical}. When differential expression was determined
+between poor and good responders in two studies where correction
+for multiple testing was applied (Chapter~\ref{ch3},~\cite{kuijjer2011mrna}, and~\cite{cleton2009profiling}), no significant
+genes were detected although larger sample sizes and homogeneous
+data sets were used (17 poor {\it vs} 8 good responders
+in Cleton-Jansen {\it et al}.~\cite{cleton2009profiling} and 36 poor {\it vs} 33 good responders
+in Kuijjer {\it et al}.~\cite{kuijjer2011mrna}). Although these sample sizes are not comparable
+to what is often used for studying less rare tumor
+types, the distribution of the nonadjusted p-values did not
+show any trend for the lower p-values to be more prevalent
+(Additional Figure~\ref{afig2.1}). This indicates that in a comparison
+between two groups no effect is detected, and increasing
+sample size will not lead to a significant increase in power~\cite{van2009relative}. A
+major issue with comparing responders with nonresponders in
+gene expression analysis is that resistance to chemotherapy may
+be caused by the alteration of a single gene. A specific gene
+causing resistance in a subset of samples will not be picked up
+by a comparison of responders and nonresponders~\cite{borst2010predictive}.
+
+In human osteosarcoma xenografts, significant differential
+expression has been detected between good and poor responders
+to single chemotherapeutic agents~\cite{bruheim2009gene}. A pitfall of this
+study, however, was that the studied sample set included xenografts
+derived from biopsies, resections as well as from metastases.
+Surviving cells of pretreated tumors are resistant to
+chemotherapy. Thus, the differences in gene expression
+between poor and good responders to these chemotherapeutic
+agents may actually reflect an effect of presurgery therapy.
+It was indeed demonstrated that xenografts of these
+implanted pretreated tumors often responded poorly to multiple
+chemotherapeutic agents~\cite{bruheim2004human}.
+
+\subsection{Genome\hyp{}wide gene expression data, comparison with control tissues}
+mRNA expression levels in osteosarcoma samples can also be
+compared to expression in control tissues. The control tissues
+that have been used for this purpose are normal bone, osteoblastoma,
+osteoblasts, MSCs, or, for example, a pool of different
+cell lines. One comparison of high\hyp{}grade osteosarcoma
+biopsy specimens with control samples is described in Cleton-Jansen {\it et al}.~\cite{cleton2009profiling}, who made different comparisons of 25 osteosarcoma
+biopsies with five osteoblastomas, with five MSCs
+and with five osteoblast cultures. Gene set enrichment
+detected cell\hyp{}cycle regulation and DNA replication pathways
+as the most significantly affected pathways in osteosarcoma.
+A DNA replication network was also identified in an analysis
+of gene expression microarrays of six osteosarcoma biopsies
+as compared to one osteoblast culture although a caveat of
+this study is the small sample size of the control set
+($n=1$)~\cite{sadikovic2009identification}. A larger set of osteosarcoma biopsies ($n=84$) was
+compared to 12 MSCs and separately with three osteoblast
+cultures (Chapter~\ref{ch7},~\cite{kuijjer2012identification}). Intersection of the differentially expressed genes in
+both analyses identified antigen processing and presentation
+as well as angiogenesis as significantly different between tumor
+samples and control cell lines, most probably because of
+the amount of stroma present in the tumor samples. In addition,
+altered apoptosis and signal transduction were detected.
+
+\subsection{Genome\hyp{}wide gene expression data, experimentally induced differences}
+We give a final example of genome\hyp{}wide gene expression
+analyses in osteosarcoma, which is experimentally induced
+differential expression. This is, for example, reported in the
+study by Kansara {it et al}.~\cite{kansara2009wnt}, who compared a set of five human
+osteosarcoma cells treated with a demethylating agent to
+untreated cells, after having shown that demethylating agents
+can induce growth arrest and differentiation in osteosarcoma.
+The list of candidate genes was then filtered for expression in
+human osteoblasts and loss of expression in primary osteosarcomas.
+This screen identified {\it WIF1}, a Wnt inhibitory factor,
+as a candidate tumor suppressor in osteosarcoma.
+
+\subsection{microRNA expression data}
+Several studies have been published, describing miRNA
+microarray data analysis on osteosarcoma tissues or cell lines
+as compared to osteoblasts or normal bone, but in most studies
+no robust statistics were applied. Jones {\it et al}.~\cite{jones2012mirna} and
+Naml{\o}s {\it et al}.~\cite{namlos2012modulation} published the only miRNA microarray studies
+in which false discovery rate corrections were applied. In
+the article by Jones {\it et al}.~\cite{jones2012mirna}, miRNA expression was compared
+between 18 osteosarcoma resections or biopsies and 12 normal
+bone samples, which lead to the detection of a downregulated
+tumor suppressive miRNA and of a prometastatic
+miRNA (these miRNAs will be discussed in the Integrative % OBS! add link here and to section
+analyses section). Naml{\o}s {\it et al}.~\cite{namlos2012modulation} compared miRNA expression
+in 19 osteosarcoma cell lines with expression in normal
+bone ($n=4$) and integrated these results with mRNA expression
+data. Results from this study will therefore be discussed
+in the Integrative analyses section. Sarver {\it et al}.~\cite{sarver2010s} published % OBS! add link here and to section
+an online accessible Sarcoma miRNA expression database
+(S-MED), which includes 15 osteosarcoma samples and six
+normal bone samples.
+
+\subsection{Genome\hyp{}wide methylation data}
+Only three studies have been published so far on genome\hyp{}wide
+methylation in high\hyp{}grade osteosarcoma~\cite{sadikovic2009identification,sadikovic2008vitro,kresse2012integrative}. These
+studies describe an integrative analysis with different data
+types, without presenting conclusions on specific genes, or on
+results obtained with gene set enrichment on single\hyp{}way
+methylation analyses although Kresse {\it et al}.~\cite{kresse2012integrative} found overall
+more hypermethylation in osteosarcoma cell lines than hypomethylation.
+We will discuss the results from these studies
+under the Integrative analysis section of this review. % OBS! add link here and to section
+
+\subsection{Genomic copy number data}
+The genomic instability of high\hyp{}grade osteosarcoma, which is
+more pronounced in this tumor than in many other tumor
+types, hampers the identification of specific genomic regions.
+Several array comparative genomic hybridization (aCGH)
+studies~\cite{kresse2011preclinical,squire2003high,man2004genome,atiye2005gene,yang2011genetic,kresse2009lsamp,lockwood2011cyclin} and single\hyp{}nucleotide polymorphism (SNP)
+microarray studies~\cite{kuijjer2012identification,yen2009identification,kresse2010evaluation,smida2010genomic,pasic2010recurrent} on osteosarcoma specimens have
+been published. Copy number profiles clearly show that
+high\hyp{}grade osteosarcoma samples are characterized by a high
+level of aneuploidy, and that there is heterogeneity between
+different tumor samples. There is a general consensus about
+copy number alterations for some regions, such as gains on
+chromosome arms 6p, 8q and 17p, which have been detected
+by classical karyotyping and conventional CGH as well~\cite{raymond2002conventional,lau2003frequent},
+but it is difficult to directly compare studies as the definition
+of a recurrent alteration varies.
+
+In three separate studies, a focal deletion of the region
+3q13.31, which harbors a putative tumor suppressor gene,
+{\it LSAMP}, was detected~\cite{kresse2009lsamp,yen2009identification,pasic2010recurrent}. siRNA\hyp{}mediated silencing of
+{\it LSAMP} promoted proliferation of normal osteoblasts~\cite{pasic2010recurrent}, and
+low expression of the gene was associated with poor overall
+survival in one of these studies~\cite{kresse2009lsamp}. Gene set enrichment on an
+aCGH study showed an enrichment of amplified genes of the
+VEGF signaling pathway of which {\it VEGFA} amplification also
+correlated with poor prognosis, showing that gene set enrichment
+on copy number data can identify pathways associated
+with tumorigenesis~\cite{yang2011genetic}.
+
+Copy number profiles of osteosarcoma cell lines roughly
+resemble profiles of tumor biopsies, but show an increased
+overall aneuploidy (Kuijjer {\it et al}., {\it unpublished data}) and
+increased expression of genomic instability genes (Chapter~\ref{ch7},~\cite{kuijjer2012identification}). Also, as
+described above, genomic profiles of xenografts are highly
+similar to primary tumors although some deviations may
+occur owing to additional genetic alterations during passaging,
+or owing to general tumor progression~\cite{kresse2011preclinical}. In some data
+sets, specific copy number alterations have not been detected
+for different clinical groups of interest~\cite{kuijjer2012identification} although both a high
+degree of genomic alterations and a loss of heterozygosity
+were found to be associated with poor event\hyp{}free survival~\cite{kuijjer2012identification,smida2010genomic}.
+Yen {\it et al}.~\cite{yen2009identification} found that specific aberrations were more frequent
+in recurrences and metastases than in primary
+tumors---deletion of 6q14.1-q22.31 and 8p23.2-p12 and
+amplification of 8q21.12-q24.3 and 17p12---and vice versa---Xp11.22 gain and 13q31.3 deletion~\cite{yen2009identification}.
+
+%
+\section{Integrative analyses}\label{integrative2}
+For high-grade osteosarcoma, integration of different data
+types is of specific importance. Integrative analysis can narrow
+down the large lists of significantly affected genes to a
+gene list containing the major tumor driver genes. An integrative
+approach on copy number and gene expression data,
+for example, typically returns a more specific list of driver
+genes because passenger- and tissue\hyp{}specific genes will be
+largely eliminated~\cite{lee2008integrative}. Different methods exist for the integration
+of different types of data. Figure~\ref{fig2.2} shows an overview of
+direct dependencies between copy number, methylation,
+miRNA and mRNA data.
+%
+\begin{figure}[htbp]
+  \centering
+  \begin{minipage}[b]{0.50\linewidth}
+    \includegraphics[width=1\textwidth]{figs02/fig2bw.pdf}	% pdf version also bw
+  \end{minipage}
+    \hfill
+  \begin{minipage}[b]{0.46\linewidth}
+    \caption{Flow chart showing
+direct dependencies between different data types, which can be
+utilized for the interpretation of integrative analyses. Arrow\hyp{}headed
+and bar\hyp{}headed lines show positive and negative influences,
+respectively. DNA copy number positively affects miRNA and mRNA
+copies, whereas miRNA expression can cause downregulation of
+target mRNAs, and DNA methylation can inhibit transcription.}
+     \label{fig2.2}
+     \end{minipage}
+\end{figure}
+%
+Comparison of data can be performed
+nonpaired or paired, and by determining correlation
+or cooccurrence.
+
+Cooccurring genomic alterations and gene expression
+changes have been recently determined to identify putative
+driver genes in high\hyp{}grade osteosarcoma (Chapter~\ref{ch7},~\cite{kuijjer2012identification}). A paired integrative
+analysis of 29 pretreatment biopsies returned a list of 31
+genes with recurrence frequency of at least $35\%$, which showed an
+overall significant upregulation as compared to control cell
+lines in case of a gain, and downregulation in case of a deletion.
+Genes affecting genomic stability were overrepresented,
+which may point to a role of this process in osteosarcoma.
+Nonpaired analysis on the same series, but extended with
+more cases in both the SNP and the gene expression data
+sets resulted in a smaller set of significantly affected genes,
+with substantial overlap with the list of genes detected by the
+paired analysis, thereby showing that the paired analysis was
+more powerful on this data set. This is especially of interest
+for the data analysis of osteosarcoma pretreatment biopsies
+because these samples are rare. By performing a paired analysis,
+fewer samples can be used. Nonpaired integrative analysis
+of high\hyp{}level amplifications in 22 osteosarcoma specimens
+with gene expression data of eight osteosarcoma xenografts
+as compared to 19 normal tissue controls identified 43 genes
+with high\hyp{}level amplification and overexpression in osteosarcoma.
+{\it CCNE1}, the gene encoding for cyclin E1, showed correlation
+of copy number levels and gene expression in an
+additional panel of ten osteosarcoma cell lines, and therefore
+could play an oncogenic role in osteosarcoma~\cite{lockwood2011cyclin}.
+
+miRNA expression data can be integrated with mRNA
+expression data to determine whether the miRNAs of interest
+affect mRNA expression of their target genes. This is
+generally performed by correlation of expression levels, as
+was performed by Baumhoer {\it et al}.,~\cite{baumhoer2012microrna} Naml{\o}s {\it et al}.~\cite{namlos2012modulation} and Jones {\it et al}.~\cite{jones2012mirna} (discussed above). The latter subsequently performed
+pathway analysis on target genes of the detected differentially
+expressed miRNAs, which illustrated the effects
+of these miRNAs on transcriptional regulation, cell\hyp{}cycle
+control and known cancer signaling pathways~\cite{jones2012mirna}. In the
+study by Naml{\o}s {\it et al}.~\cite{namlos2012modulation}, cell line miRNA data were integrated
+with mRNA targets which were significant in both
+osteosarcoma pretreatment biopsies and cell lines. Among
+the inversely correlated miRNA/mRNA pairs, miRNAs regulating
+{\it TGFBR2}, {\it IRS1}, {\it PTEN} and PI3K subunits were
+detected. Methylation data are also typically integrated with
+mRNA expression data to evaluate the effect of the methylation
+on gene expression, but few studies described two\hyp{}way
+comparisons of methylation and mRNA microarray data in
+osteosarcoma. Kresse {\it et al}.~\cite{kresse2012integrative} detected hypermethylation and
+underexpression of chemokine ligand 5 ({\it CXCL5}) by two\hyp{}way
+comparison in both osteosarcoma cell lines and tumor
+samples.
+
+Integration of more than two different data types is
+reported by Sadikovic {\it et al}.~\cite{sadikovic2008vitro} in two articles, where copy
+number, methylation and gene expression data were integrated.
+In one of these articles, the authors described cooccurrent
+epigenetic, genomic and gene expression changes
+in two osteosarcoma cell lines as compared to an osteoblast
+culture, and detected a region of gain on chromosome 8q
+encompassing the {\it c-MYC} oncogene, which was also detected
+in a network analysis, confirming overexpression and hypomethylation
+of genes connected to {\it c-MYC}. In the second article,
+the authors used the same integrative approach to
+perform a three\hyp{}way analysis on five osteosarcoma pretreatment
+biopsies, and to compare gene regulation networks of
+single\hyp{}way analyses including more samples. In this way, a
+number of candidate genes were characterized, including
+{\it RUNX2}, a transcription factor involved in osteoblastic differentiation~\cite{sadikovic2009identification}. A
+shortcoming of both studies, however, is that
+as a control for methylation and mRNA expression in
+osteosarcoma, material from only one osteoblastic culture
+was used. Another integrative analysis on copy number,
+methylation and mRNA data reported 350 genes, showing
+two types of aberrations ({\it e.g.} gain and overexpression, or hypermethylation
+and underexpression). This set of genes was
+enriched in genes with a function in skeletal system development
+and extracellular matrix remodeling, such as {\it RUNX2}
+and {\it DLX5}~\cite{kresse2012integrative}.
+
+%
+\section{Translating bioinformatics into functional studies}\label{translating2}
+\subsection{Functional validation of candidate genes}
+Several of the candidate tumor suppressor genes and oncogenes
+that have been identified with microarray studies have
+been functionally validated. {\it IGFBP5} was significantly downregulated
+in metastatic cell lines and derivative tumors as compared
+to nonmetastatic cell lines, and also showed lower
+protein expression in metastatic lesions than in primary tumor
+samples of osteosarcoma patients. The effects of overexpression
+or knockdown of {\it IGFBP5} on cell proliferation,
+migration, wound healing and invasion confirmed the role of
+this IGF\hyp{}binding protein in preventing metastasis, which was
+furthermore validated in a xenograft model~\cite{su2011insulin}.
+
+The candidate tumor suppressor gene {\it WIF1} was found to
+regulate differentiation and suppress cell growth {\it in vitro}.
+{\it WIF1} knockout mice developed radiation\hyp{}induced osteosarcoma
+earlier than their littermate controls~\cite{kansara2009wnt}. From miRNA
+expression profiling studies, miR-16 was validated as a tumor
+suppressive miRNA, whereas miR-27a was validated as a
+prometastatic miRNA, using colony formation assays, and
+wound healing and invasion assays, respectively. Overexpression
+of these miRNAs {\it in vivo} resulted in smaller tumors for
+miR-16, and in higher numbers of pulmonary metastases for
+miR-27a~\cite{jones2012mirna}.
+
+\subsection{Functional validation of pathway activity and enriched gene sets}
+Pathways important in the development of bone biology have
+been returned from gene expression analysis as compared to
+controls. Genes upstream canonical Wnt signaling were, for
+example, found to be downregulated as compared to osteoblasts~\cite{cleton2009profiling}. A
+subsequent functional study, where nuclear $\upbeta$-catenin
+staining was determined on osteosarcoma biopsies, and
+Wnt luciferase activity and mRNA expression of the specific
+downstream Wnt target gene Axin2 were measured in cell
+lines, illustrated that canonical Wnt signaling is indeed often
+downregulated in osteosarcoma~\cite{cai2010inactive}. Loss of canonical Wnt signaling
+causes failure to commit to differentiation of MSCs, as
+has been reported in malignant fibrous histiocytoma (also
+undifferentiated pleomorphic sarcoma), which could be
+reprogrammed by re\hyp{}establishing Wnt signaling~\cite{matushansky2007derivation}. Also in osteosarcoma,
+reactivation of the Wnt signaling pathway with a
+GSK3$\upbeta$ inhibitor triggered a more differentiated phenotype,
+or a reduced proliferation capacity, depending on the osteosarcoma
+cell line~\cite{cai2010inactive}.
+
+These results seem contradictive to the finding that {\it WIF1}
+can inhibit cell growth and increase differentiation in osteosarcoma
+cells~\cite{kansara2009wnt}. A possible explanation for this discrepancy is
+that {\it WIF1} inhibits both canonical and noncanonical Wnt signaling~\cite{malinauskas2011modular},
+whereas GSK3$\upbeta$ also plays a role in additional signal
+transduction pathways, such as NF$\upkappa$B signaling~\cite{tang2012glycogen}. However,
+the role of Wnt signaling remains contradictory, as this pathway
+was recently described to be active in multiple sarcoma
+subtypes, which also included osteosarcoma~\cite{vijayakumar2011high}. The use of
+different methods to assess active Wnt signaling may be the
+cause for the discrepancies between these studies.
+
+TGF-$\upbeta$/BMP signaling was found to be affected in osteosarcoma
+by pathway analysis on mRNA expression data. Activity
+of these pathways was validated by immunohistochemistry of
+phosphorylated Smad1 and Smad2, and nuclear staining of
+these intracellular effectors was detected in 70\% of all osteosarcoma
+samples. Cases with very low or absent phosphorylated
+Smad2 had worse overall survival. {\it In vitro} pathway modulation
+did not affect proliferation or differentiation, but lower TGF$\upbeta$/BMP
+activity might affect the prevention of metastasis in
+these patients~\cite{mohseny2012activities}.
+
+The macrophage signature that was prominent upon comparing
+mRNA profiles of metastatic and nonmetastatic osteosarcoma
+was confirmed by qPCR and immunohistochemistry,
+and it was shown in additional cohorts that the sum of M1
+and M2 types of macrophages was predictive for better overall
+survival (Chapter~\ref{ch4},~\cite{buddingh2011tumor}). Treating patients with macrophage\hyp{}activating
+agents may reduce metastases of osteosarcoma~\cite{cleton2012immunotherapy}. This is corroborated
+by clinical trials in dogs and humans, where treatment
+with mifamurtide, a macrophage\hyp{}activating agent, has
+been reported to positively affect overall survival~\cite{kurzman1995adjuvant,meyers2008osteosarcoma}.
+
+%
+\section{Conclusions and future directions}\label{conclusions2}
+In this review, we have presented and discussed the results of
+studies on high\hyp{}grade osteosarcoma material using bioinformatic
+analysis on microarray data of three or more samples.
+Although studying such a very heterogeneous and genomically
+unstable tumor remains challenging, and sample sizes
+are often small owing to the rarity of the disease, structured
+microarray data analysis has provided interesting results and
+has given further insight into the biology and progression of
+osteosarcoma. This information could not have been obtained
+from functional studies only. Studying copy number aberrations,
+differential expression, and epigenetics in a genome\hyp{}wide
+manner and subsequent integration leads to new
+hypotheses regarding tumor development and progression,
+which can subsequently be validated in functional studies.
+This provides a motivation to take the study of high\hyp{}grade
+osteosarcoma to the next level, and to analyze this tumor
+into further detail using Next Generation Sequencing methods,
+such as whole\hyp{}genome, exome or transcriptome sequencing.
+Whole\hyp{}genome sequencing has recently been performed
+in a study of different cancer types, which showed that a subset
+of osteosarcomas (three out of nine) undergo chromothripsis---a
+single catastrophic genomic instability event,
+resulting in hundreds of genomic rearrangements~\cite{stephens2011massive}. This may
+explain the sudden onset of osteosarcoma and the complexity
+and heterogeneity of the osteosarcoma genome. Next Generation
+Sequencing will provide us with many forms of new information.
+In addition to copy number changes, mutations,
+translocations, unannotated genes, splicing variants, and so
+on, can be detected in a high\hyp{}throughput manner. Transcriptome
+sequencing exhibits higher sensitivity and increased
+dynamic range than mRNA expression microarray data,
+thereby providing higher power for the detection of differential
+gene expression~\cite{oshlack2010rna}. Now that the first Next Generation
+Sequencing studies including large numbers of high\hyp{}grade osteosarcoma
+are ongoing or being planned, it is important to
+reflect on the previous genome\hyp{}wide studies in osteosarcoma.
+When keeping in mind the lessons we have learned on study
+design in microarray data analysis---using a sufficient amount
+of samples, defining homogeneous groups, and analyzing the
+data with robust statistics---we will be given new opportunities
+in unraveling the biology of this complex disease and in
+providing future clinical trials with robust data to incorporate
+into novel therapeutic strategies.
+
+%%% references
+
+\begin{small}
+\begin{singlespace}
+\bibliographystyle{unsrtnatshort}		% sorted as referenced, was unsrtnat, but unsrtnatshort gives shorter output
+\bibliography{biblio}
+\end{singlespace}
+\end{small}
+
+%%% appendix
+% supporting information figure 1, now appendix figure 1
+\begin{subappendices}
+	\newpage
+	\setcounter{figure}{0}
+	\section{Additional Figures}
+		\renewcommand{\figurename}{Additional Figure}
+		%
+		\begin{figure}[h]
+		  \centering
+		    \includegraphics[width=1\textwidth]{figs02/supfig1bw.pdf}	% pdf version also bw
+		    \caption{This figure illustrates a histogram of nonadjusted, moderated p-values and the empirical
+cumulative distribution of p-values for the studies of {\it A}, Cleton-Jansen {\it et al}.~\cite{cleton2009profiling} and {\it B}, Kuijjer {\it et al}.~\cite{kuijjer2011mrna}, both describing no significant difference in mRNA expression in pretreatment biopsies of patients with poor versus good response to chemotherapy. The figures were generated using Bioconductor package {\it SSPA}~\cite{van2009relative}.}
+		     \label{afig2.1}
+		\end{figure}
+		%
+\end{subappendices}
+
+%\end{document}

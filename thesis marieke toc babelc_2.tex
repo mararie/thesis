@@ -1,0 +1,233 @@
+% Marieke Kuijjer
+% 2013-02-15
+% general file to combine all chapters together
+
+
+%%%%% start
+
+\documentclass[12pt,b5paper]{book}
+
+% layout packages and commands
+	%\usepackage{breakurl}
+	\usepackage[small]{caption}
+	\usepackage{setspace}
+	\usepackage{units}
+	\usepackage{geometry}
+	\onehalfspacing					% 1.5-spacing
+	\raggedbottom					% overcomes spacing problem
+	\usepackage{fancyhdr}				% for nice headers, which are introduced at the start of each chapter (separate .tex files)
+	\usepackage[T1]{fontenc}			% changes spacing between paragraphs (and more?)
+	\geometry{verbose,a4paper,tmargin=15mm,bmargin=30mm,lmargin=30mm,rmargin=20mm}		% makes text less bold (due to reduction A4->A5?)
+	\usepackage{appendix}
+
+% language packages and commands
+	\usepackage[english,dutch]{babel}		% loads hyphenation patterns for American English en Dutch
+	\hyphenation{bot-ont-kal-king blok-ke-ren he-ma-to-poi-e-tic Euro-BoNeT Af-fy-met-rix fibro-blastic chondro-blastic osteo-blastic im-mu-no-stim-u-la-to-ry os-teo-sar-coom xe-no-trans-plan-ta-ten}	% hyphenation for undefined words, this works
+	\usepackage{hyphenat}				% this package comes handy for rendering words combined with a hyphen available for hyphenation (except for hyphen part)
+%		\overfullrule3mm				%%% OBS! % run this to check for overfull boxes, this should be REMOVED
+	\usepackage[font=small,labelfont=bf]{caption}	% eg for hyphenation for languages with accented characters
+	\usepackage{upgreek}
+
+% packages for table of contents and commands
+	\usepackage{tocloft} %to control overfull boxes in table of contents
+	\setcounter{secnumdepth}{0} 			% do not number (sub)sections, but do list them in the table of contents
+	\setcounter{tocdepth}{1}				% the number of section levels in the table of contents
+
+% packages for figures and tables
+	%\usepackage{graphics}
+	\usepackage{graphicx}
+	\usepackage{float}
+	\usepackage{lscape}
+	\usepackage{array}
+	\usepackage{afterpage}				% to start a longtable at an even page
+	\usepackage{longtable}				% for table over multiple pages
+	\usepackage{booktabs}				% package for table with merged columns
+	\usepackage{hvfloat} 				% for rotated table on same page as section heading
+
+%%% mystrut for vertical lines table with horizontal lines stretching over several columns
+\usepackage{bigstrut}
+    \setlength\bigstrutjot{3pt}
+\makeatletter
+\newlength\mylena
+\newlength\mylenb
+\newcommand\mystrut[1][2]{%
+    \setlength\mylena{#1\ht\@arstrutbox}%
+    \setlength\mylenb{#1\dp\@arstrutbox}%
+    \rule[\mylenb]{0pt}{\mylena}}
+\makeatother
+
+%%% new environment myTable for table 5.1, a horizontal longtable which needs singlespacing small
+\newenvironment{myTable}%
+{%
+    \small
+    \singlespace
+    \setlength\tabcolsep{1.5ex}
+}%
+
+% packages and definitions for bibliographies and commands
+%	\usepackage[sectionbib]{bibunits}		% references per chapter, at section level
+%	\usepackage{cite}					% necessary for proper citing
+	\usepackage[round,numbers,sort&compress,sectionbib]{natbib}	% natbib and chapterbib should together work for generating bibliographies in each chapter	
+	\usepackage[sectionbib]{chapterbib}		% from ale's thesis
+%	\defaultbibliographystyle{unsrt}			% default style references (ale heeft \usepackage[round,numbers,sort&compress]{natbib})
+%	\renewcommand{\bibname}{References}	% OLD changes Bibliography into References
+		%% OLD to compile, open each by latex created .aux files in latex and build bibtex.
+		%% OLD close, then build latex as many times as there are reference sections
+
+% packages for links and commands
+	% \usepackage[hidelinks]{hyperref} % does not work here, does work in chapter files
+	\usepackage[linktocpage]{hyperref}		% linktocpage nodig om te klikken op page#, daardoor line te kunnen breaken in toc
+	\usepackage[all]{hypcap}
+
+%%% fancyhdr should be called from main file. this returns the right chapter number, also at the final page of the chapter
+  \pagestyle{fancy}
+	\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+	\renewcommand{\sectionmark}[1]{\markright{\thesection\ #1}} \fancyhf{}
+	\fancyhead[LE,RO]{\bfseries\thepage}
+	\fancyhead[LO]{\bfseries\ Chapter \thechapter}				% instead of Chapter 
+	\fancyhead[RE]{\bfseries\ Chapter \thechapter}		% instead of Chapter \thechapter
+	\renewcommand{\headrulewidth}{0.5pt}
+	\renewcommand{\footrulewidth}{0pt}
+	\addtolength{\headheight}{0.5pt}
+
+%%% 2013-04-17 clearemptydouble page for first pages of thesis
+\let\origdoublepage\cleardoublepage
+\newcommand{\clearemptydoublepage}{%
+  \clearpage
+  {\pagestyle{empty}\origdoublepage}%
+}
+
+%%%
+
+
+\begin{document}
+\selectlanguage{english}
+
+%%%%% begin first titlepage
+\begin{titlepage}
+	\thispagestyle{empty}
+	{\centering    
+		\vspace*{1.cm} 
+	 	\vspace*{3.cm} 
+		\begin{doublespace}	%%% 2013-04-09
+	  	{\huge\sc A Systems Biology Approach to Study High-grade Osteosarcoma}\\
+		\end{doublespace}		%%% 2013-04-09
+}
+\pagebreak 
+	\thispagestyle{empty}
+	\vspace*{\fill}
+%		\\
+\begin{minipage}[b]{0.55\linewidth}
+	{\setlength{\parindent}{0cm}
+	\begin{singlespace}
+		\footnotesize{
+			The work presented in this thesis was financially supported by the Dutch Cancer Society (2008-4060) and EuroBoNeT, a European Commission granted Network of Excellence for studying the pathology and genetics of bone tumors (LSHC-CT-2006-018814).\newline
+
+			Publication of this thesis was financially supported by the Dutch Cancer Society and by the Department of Pathology, Leiden University Medical Center.\newline
+
+			Cover art: M.L. Kuijjer, photographs of the contemporary artwork `Ritterschlacht' by Martin Honert, taken at the exhibition `Kinderkreuzzug', Hamburger Bahnhof, Berlin, Germany.\newline
+
+			Printed by: W\"ohrmann Print Service, Zutphen, the Netherlands.
+		}%footnotesize
+	\end{singlespace}
+	}%parindent for this minipage
+\end{minipage}
+%\end{titlepage}
+\newpage
+%
+%%% begin second titlepage
+%\begin{titlepage}
+	\thispagestyle{empty}
+	{\centering    
+		\vspace*{1.cm} 
+%	  	{UNIVERSITEIT LEIDEN}\\  
+ 	\vspace*{3.cm} 
+		\begin{doublespace}	%%% 2013-04-09
+	  	{\huge\sc A Systems Biology Approach to Study High-grade Osteosarcoma}\\
+		\end{doublespace}		%%% 2013-04-09
+	\vspace*{3.5cm}
+			\huge Proefschrift\\
+			\large
+	  \vspace{1.5cm}
+			ter verkrijging van\\
+		  	de graad van Doctor aan de Universiteit Leiden,\\
+			op gezag van Rector Magnificus prof.mr. C.J.J.M. Stolker,\\
+			volgens besluit van het College voor Promoties\\
+			te verdedigen op woensdag 26 juni 2013\\
+			klokke 16.15 uur\\
+  	\vspace{4.cm}
+			door\\
+	\vspace {0.5cm}
+			Marieke Lydia Kuijjer\\	
+%	\vspace {0.5cm}
+			geboren te Zaanstad\\
+			in 1982\\
+}%centering
+\pagebreak 
+	\thispagestyle{empty}
+	\vspace {1cm}
+\begin{tabular}{ll}
+	\multicolumn{2}{l}{{\bf Promotiecommissie}}\\
+		\\
+		Promotor: & Prof. dr. P.C.W. Hogendoorn\\
+		\\
+		Co-promotor: & Dr. A.M. Cleton-Jansen\\
+		\\
+		Overige leden: & Prof. dr. C.J. Cornelisse\\
+		& Prof. dr. J. Kirpensteijn (Utrecht University, Utrecht)\\
+		& Prof. dr. O. Myklebost (Norwegian Radium Hospital, Oslo, Norway)\\
+		& Dr. J.M. Boer (Erasmus Medical Center, Rotterdam)\\
+\end{tabular}
+
+\end{titlepage}
+%
+%%%
+%%%%%% test other page
+%\newpage
+%\pagestyle{empty}
+%\cleardoublepage
+%\clearpage{\cleardoublepage} %empty page won t have header
+
+\thispagestyle{empty}
+\vspace*{\fill} 
+\begin{quote} 
+\centering 
+``Qui o altrove, tenente, siamo tutti da qualche parte per sbaglio''
+\end{quote}
+\begin{quote} 
+\centering 
+\textit{Il deserto dei Tartari, Dino Buzzati / Valerio Zurlini}
+\end{quote}
+\begin{quote} 
+\centering 
+\end{quote}
+\vspace*{\fill}
+
+
+%%%%% table of contents
+\clearemptydoublepage
+%\cleardoublepage{\pagestyle{empty}} %%% OBS! 2013-04-17 test
+\newpage
+\setcounter{tocdepth}{0}
+\tableofcontents
+\thispagestyle{empty}
+\clearemptydoublepage % 2013-04-17
+%\cleardoublepage
+
+
+%%%%% include chapters
+\newpage
+\renewcommand{\bibname}{References}
+
+\include{chapter01c}
+\include{chapter02}
+\include{chapter03c}
+\include{chapter04c}
+\include{chapter05}
+\include{chapter06c}
+\include{chapter07c}
+\include{chapter08c}
+\include{chapter09}
+\include{chapter10_2}
+
+\end{document}

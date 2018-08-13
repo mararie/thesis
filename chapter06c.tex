@@ -1,0 +1,247 @@
+% Marieke Kuijjer
+% 2013-02-15
+% chapter 06
+
+	%\documentclass[12pt,b5paper]{book}
+	%\setcounter{secnumdepth}{0}
+	%\setcounter{tocdepth}{1}
+	%\usepackage[hidelinks]{hyperref}
+
+%%% OBS! 1 reference added: kuijjer2011mrna (at 9,14 instead of kuijjer2011identification)
+
+%\begin{document}
+
+%%% title page
+
+\chapter{Kinome and mRNA expression profiling of osteosarcoma identifies genomic instability, and reveals Akt as potential target for treatment}\label{ch6}
+\thispagestyle{empty}				%%% to remove page number from first page of chapter, must be placed after calling the chapter
+
+\vfill
+
+\vspace{0.5cm}
+This chapter is based on the manuscript:
+\underline{Kuijjer ML}, van den Akker BEWM, Hilhorst R, Mommersteeg M, Buddingh EP, Serra M, B{\"u}rger H, Hogendoorn PCW, Cleton-Jansen AM. {\it Submitted}
+
+\newpage
+
+%%% main document
+
+\section{Abstract}\label{abstract6}
+\textbf{Background}: High\hyp{}grade osteosarcoma is a primary malignant bone tumor mostly occurring in adolescents and young adults, with a second peak at middle age. Overall survival is approximately 60\%, and has not significantly increased since the introduction of neoadjuvant chemotherapy in the 1970s. The genomic profile of high\hyp{}grade osteosarcoma is complex and heterogeneous. Integration of different types of genome\hyp{}wide data may be advantageous in extracting relevant information from the large number of aberrations detected in this tumor.
+
+\textbf{Methods}: We analyzed genome\hyp{}wide gene expression data of osteosarcoma cell lines, and integrated these data with a kinome screen. Data were analyzed in statistical language R, using {\it LIMMA} for detection of differential expression/phosphorylation. We subsequently used Ingenuity Pathways Analysis to determine deregulated pathways in both data types.
+
+\textbf{Results}: Gene set enrichment indicated that pathways important in genomic stability are highly deregulated in these tumors, with many genes showing upregulation, which could be used as a prognostic marker, and with kinases phosphorylating peptides in these pathways. Akt and AMPK were identified as active and inactive, respectively. As these pathways have an opposite role on mTORC1 signaling, we set out to inhibit Akt with the allosteric Akt inhibitor MK-2206. This resulted in inhibition of proliferation of osteosarcoma cell lines U-2 OS and HOS, but not of 143B, which harbors a {\it KRAS} oncogenic transformation.
+
+\textbf{Conclusions}: We identified both overexpression and hyperphosphorylation in pathways playing a role in genomic stability. Kinome profiling identified active Akt signaling, which could inhibit proliferation in 2/3 osteosarcoma cell lines. This study provides a rationale for further testing inhibitors of the PI3K/Akt/mTORC1 pathway in preclinical studies of osteosarcoma.
+
+\section{Background}\label{introduction6}
+High\hyp{}grade osteosarcoma is the most prevalent primary malignant bone tumor. Most frequently, the long bones of adolescents and young adults are affected, with a yearly incidence of approximately 5 cases per million per year~\cite{raymond2002conventional}. Patients are generally treated with high doses of neoadjuvant chemotherapy to prevent the outgrowth of micrometastases. In 15--25\% of all patients, however, metastatic disease is clinically detectable at diagnosis and despite the intensive treatment, 45\% of all patients develop distant metastases, the leading cause of death of osteosarcoma patients~\cite{bacci2006prognostic,buddingh2010prognostic}. The introduction of neoadjuvant chemotherapy in the 1970s has increased survival from 10--20\% to approximately 60\%. However, survival has reached a plateau, and new treatments are urgently needed~\cite{allison2012meta,anninga2011chemotherapeutic,hattinger2010emerging}. Osteosarcoma is an extremely genomically unstable tumor, with karyotypes harboring numerous numerical and structural changes~\cite{cleton2005central,szuhai2012molecular}. In addition, osteosarcoma genotypes show a considerable degree of heterogeneity, both intra- and intertumoral. Both the complex genotype and its heterogeneity render it difficult to determine which genomic alterations are important in osteosarcomagenesis, as not all alterations may lead to a difference in mRNA, protein levels, or enzyme activity in the tumor tissue. Integration of different data types is therefore of particular relevance for studying a heterogeneous tumor with a complex genomic profile such as osteosarcoma. Previously, genomic and expression data of osteosarcoma pretreatment biopsies have been integrated, in order to detect highly recurrent osteosarcoma driver genes. The list of driver genes obtained with this study was enriched in genes playing a role in genomic stability~\cite{kuijjer2012identification}. Yet, even though recurrent driver genes may provide knowledge on what pathways are affected that help tumor cells survive, such driver genes may not always be accessible as targets for treatment. This especially holds for pathways involved in genetic stability, since the damage is already done.
+
+Oncogenic kinases are often active in tumor cells, and a number of kinases can be pharmacologically inhibited. Therapies targeting oncogenic kinases have provided promising results in inhibiting proliferation of cancer cells, and some kinases have been targeted in preclinical and clinical studies in childhood sarcomas (as reviewed in Wachtel {\it et al}.~\cite{wachtel2010targets}), {\it e.g.} IGF1R and mTOR~\cite{kolb2010r1507,chawla2012phase}. An unbiased approach to identify active kinases in cancer is to perform kinome\hyp{}wide screens. Such screens have previously been effectively used in other types of sarcoma and have led to the detection of specific targets for treatment~\cite{schrage2009kinome,willems2010kinome}. As combining the analysis of different data types using systems biology approaches can give a more complete impression of the state of a tumor cell, we set out to integrate genome\hyp{}wide gene expression data of osteosarcoma cell lines with kinome profiling data. Osteosarcoma cell lines are widely available and have been shown to be representative for the tumor of origin, both on a genome\hyp{}wide as on a functional level, and are therefore a good model to study osteosarcoma preclinically~\cite{kuijjer2011mrna,mohseny2011functional}. We previously have performed genome\hyp{}wide expression analysis on a panel of 19 osteosarcoma cell lines~\cite{ottaviano2010molecular}. In the present study, we compared expression profiles with the different putative progenitor cells of osteosarcoma---mesenchymal stem cells (MSCs) and osteoblasts---in order to define the common denominator pathways that are deregulated in osteosarcoma. Pathways with a role in genomic stability appeared to be enriched in overexpressed genes. By integrating expression data with a serine/threonine (Ser/Thr) kinome screen, we show that these pathways are enriched in hyperphosphorylation as well, confirming that genomic stability is highly deregulated in osteosarcoma, both on a transcriptional level and on phosphorylation activity.
+
+In order to detect overactive kinases in osteosarcoma, which may be potential targets for treatment, we identified the most significant pathways in the kinome profiling data, which indicated active PI3K/Akt and inactive AMPK signaling. These pathways play an opposite role in mTORC1 signaling, with Akt promoting and AMPK inhibiting signal transduction~\cite{memmott2009akt}. We pharmacologically inhibited Akt in osteosarcoma cell lines, which reduced proliferation of 2/3 cell lines. In summary, this study describes integration of mRNA and phosphorylation data, and gives a rationale for treatment of osteosarcoma with inhibitors of the PI3K/Akt pathway.
+
+\section{Methods}\label{methods6}
+\subsection{Cell culture}
+Osteosarcoma cell lines were previously characterized and described~\cite{ottaviano2010molecular}. Human bone\hyp{}marrow\hyp{}derived MSCs were obtained from two osteosarcoma patients, and were characterized and handled as described~\cite{cleton2009profiling}. For kinome profiling of osteosarcoma versus MSCs, cells were cultured in Dulbecco's Modified Eagle Medium (DMEM; Invitrogen, Carlsbad, CA), supplemented with 10\% fetal bovine serum (Greiner Bio-one, Frickenhausen, Germany), in order to eliminate differences in kinase activity caused by culture conditions. For inhibition experiments and kinome profiling of inhibition experiments, osteosarcoma cell lines 143B, U-2 OS, and HOS were maintained in RPMI 1640 supplemented with 10\% fetal calf serum (both from Invitrogen, Carlsbad, CA). The human pre-B acute lymphoblastic leukemia cell line NALM-6 cell line was kindly provided by Mw. N. Duinkerken (Department of Hematology, Leiden University Medical Center, the Netherlands), and was maintained in Iscove's Modified Dulbecco's Medium (IMDM) supplemented with GlutaMAX-1 (Life Technologies, Carlsbad, CA) and 10\% fetal bovine serum (Greiner Bio-one, Frickenhausen, Germany). All cells were regularly tested for mycoplasm and were genotyped using the Powerplex 1.2 system (Promega, Leiden, the Netherlands), as described previously~\cite{mohseny2011functional}.
+
+\subsection{Cell lysates}
+Kinome profiling was performed on osteosarcoma cell lines 143B and U-2 OS and on two MSCs---MSC001 and MSC006. Cells at 80\% confluence were washed twice with Phosphate buffered Saline and lysed with M-PER Mammalian Extraction Buffer, supplemented with Halt Phosphatase Inhibitor Cocktail and EDTA free Halt Protease Inhibitor Cocktail (Pierce Biotechnology, Rockford, IL), according to the manufacture's protocol. Cells were incubated on ice for at least 30 minutes before collecting the lysates and centrifuging these for 15 minutes at 4$^\circ$C at $>10,000\cdot g$. Protein concentration was measured using a detergent\hyp{}compatible Protein Assay (Bio-Rad Laboratories, Hercules, CA) according to the manufacturer's protocol. Samples were snap\hyp{}frozen and stored at -70$^\circ$C.
+
+\subsection{Proliferation assays}
+MK-2206 was dissolved in DMSO at a concentration of 10mM and stored at -20$^\circ$C. For 143B, U-2 OS, and HOS, $2,000$, $4,000$, and $2,000$ cells/well respectively, were plated in a 96-wells plate. NALM-6, a human pre-B acute lymphoblastic leukemia (ALL) cell line, was included as a positive control, as ALL cell lines have been shown to be highly sensitive to MK-2206~\cite{gorlick2012testing}. This cell line grows in suspension and was plated at $50,000$ cells/well. After 24hrs, MK-2206 was added in triplicate in different concentrations---0nM, 0.5nM, 1nM, 5nM, 10nM, 50nM, 100nM, 500nM, 1$\upmu$M, 5$\upmu$M, and 10$\upmu$M. For 143B and HOS, the effect of concentrations of 2, 3, 4, and 5nM was assessed as well. Cells were grown in the presence of inhibitor for 120hrs. Cell proliferation was determined by incubating the cells with reagent WST-1 (Roche, Basel, Switzerland) for 2hrs and subsequently measured using a Wallac 1420 VICTOR2 (Perkin Elmer, Waltham, MA). Data were analyzed in Graphpad Prism 5.01 (\url{www.graphpad.com}). Relative IC$_{50}$s were calculated using results from the different concentrations up to the highest dose where toxicity was not yet present. The results shown are representative results from at least three independent experiments.
+
+\subsection{Genome\hyp{}wide gene expression profiling}
+We analyzed our previously published data of osteosarcoma cell lines ($n=19$), MSCs ($n=12$), and osteoblasts ($n=3$) (GEO superseries, accession number GSE42352)~\cite{kuijjer2012identification}. Microarray data processing and quality control were performed in the statistical language R version 2.15~\cite{r2.15.0} as described previously~\cite{buddingh2011tumor}.
+
+\subsection{Kinome profiling}
+Kinome profiling was performed on 1$\upmu$g of cell lysate on the serine/threonine (Ser/Thr) Kinase PamChip\textregistered peptide microarrays (PamGene, 's-Hertogenbosch, the Netherlands) according to the manufacturer's protocol, essentially as described in Hilhorst {\it et al}.~\cite{hilhorst2013peptide}. This peptide microarray comprises 142 peptide sequences derived from human phosphorylation sites. Peptide phosphorylation is detected in time with a mixture of fluorescently labeled antiphosphoserine/threonine antibodies. We used at least three technical replicates for each MSC line, and four technical replicates for the osteosarcoma cell lines. Images were taken every 5 minutes, over the course of 60 minutes. Signal quantification on phosphorylated peptides was performed in BioNavigator software (PamGene International, 's Hertogenbosch, the Netherlands). Subsequently, data were normalized in R~\cite{smyth2004linear} using the {\it vsn} package~\cite{huber2002variance}. Median signals at 60 minutes of incubation with the cell lysates were analyzed in Bioconductor~\cite{gentleman2004bioconductor} package {\it arrayQualityMetrics}~\cite{kauffmann2009arrayqualitymetrics} to identify poor quality samples, which were removed from further analysis. Technical replicates of good quality were averaged. To determine whether these data were reproducible, we analyzed data from different cycles (0, 10, 20, 30, 40, 50, and 60 minutes incubation with cell lysates).
+
+In the second kinome profiling experiment we compared lysates of untreated cells with lysates of cells treated with MK-2206. Different treatment durations and concentrations were used---no treatment, treatment for 5, 30, 180, and 960 minutes with 1$\upmu$M MK-2206, and treatment for 180 minutes with 10$\upmu$M of the drug. Kinome profiling was performed as described above, with the difference that we used 1--5 technical replicates per condition. Of this experiment, we analyzed signals at 30 minutes of incubation with the lysates.
+
+\subsection{Statistical analyses of microarray data}
+We performed {\it LIMMA} analysis~\cite{smyth2004linear} in order to determine differential mRNA expression between osteosarcoma cell lines ($n=19$) and control cell lines---MSCs ($n=12$) and osteoblasts ($n=3$) and to determine differential phosphorylation of peptides on the PamChip\textregistered microarray between osteosarcoma cell lines ($n=2$) and MSCs ($n=2$). We used a Benjamini and Hochberg False Discovery Rate (FDR) of 0.05 as cut-off for significance. Kinome profiling signals obtained for the different treatment conditions were analyzed in a paired approach, in which signals from untreated cells were subtracted from the signals from treated cells. For both kinome profiling experiments, we used a cut-off of 0.1 for the absolute log fold change (logFC). Heatmaps were generated using the function heatmap.2 of R package gplots.
+
+\subsection{Pathway analysis}
+In order to reveal pathways which were significantly affected on mRNA levels in osteosarcoma cell lines, we intersected the toptables obtained by {\it LIMMA} analysis of osteosarcoma cell lines versus MSCs and of osteosarcoma cell lines versus osteoblasts. Gene symbols for all probes were imported into the software Ingenuity Pathways Analysis (IPA, Ingenuity Systems, \url{www.ingenuity.com}), together with FDR adjusted p-values (adjP) and average logFCs. Only the gene symbols of probes that were both significantly upregulated or both significantly downregulated in osteosarcoma cell lines as compared with MSCs and with OBs (adjP $<0.05$) were selected to be considered as significantly differentially expressed in the IPA analysis. For differential phosphorylation, we imported the results from the {\it LIMMA} analysis on kinome profiling data, with a cut-off of 0.05 for adjusted p-value and a cut-off of 0.1 for logFC. The significance of the association between the data set and the canonical pathways was measured as described previously~\cite{mohseny2012activities}. Pathways with adjP $<0.05$ were considered to be significantly affected. In addition, transcription factor analyses were performed on gene expression data in IPA in order to predict activated or inhibited transcription factors based on expression of target genes, returning p-values (with a cut-off of 0.05 for significance) and regulation z-scores.
+
+\section{Results}\label{results6}
+\subsection{Genome\hyp{}wide gene expression profiling of high\hyp{}grade osteosarcoma cell lines}
+We started by comparing gene expression signatures of 19 osteosarcoma cell lines, 12 MSC, and 3 osteoblast cultures using unsupervised hierarchical clustering. Two separate clusters were detected---one containing all tumor cell samples and one containing control samples. Within the control sample cluster, osteoblasts clustered separately from MSCs ({\it data not shown}). {\it  LIMMA} analysis resulted in $7,891$ probes encoding for differentially expressed (DE) genes between osteosarcoma cell lines and MSCs, and $2,222$ probes encoding for DE genes between osteosarcoma cells and osteoblasts. Intersecting of these gene lists showed $1,410$ probes that were significant in both analyses, of which $1,390$ were upregulated in both analyses, or downregulated in both analyses (Figure~\ref{fig6.1}). These probes, encoding for $1,312$ genes, were selected for subsequent pathways analysis, in order to determine commonly affected pathways in osteosarcoma tumor cells.
+%
+\begin{figure}[htbp]
+  \centering
+  \begin{minipage}[b]{0.50\linewidth}
+%    \includegraphics[width=1\textwidth]{figs06/fig1bw.pdf}		% OBS! print version bw
+   \includegraphics[width=1\textwidth]{figs06/fig1col.pdf}	% OBS! pdf version rgb
+  \end{minipage}
+    \hfill
+  \begin{minipage}[b]{0.46\linewidth}
+     \caption{Venn diagram showing the significant probes in the analysis of osteosarcoma cell lines {\it vs} MSC (vsMSC) and {\it vs} osteoblasts (vsOB), and the intersection of these significant probes with the subset of all probes (both significant and nonsignificant) that shows both up- or both downregulation in these two analyses (same sign). In total, $1,410$ probes are significant in both analyses, of which $1,390$ have the same sign of logFC.}
+     \label{fig6.1}
+     \end{minipage}
+\end{figure}
+%
+
+\subsection{Gene expression is altered in pathways regulating genomic stability}
+Pathway analyses on the $1,312$ differentially expressed genes resulted in 17 significantly affected pathways (Figure~\ref{fig6.2}).
+%
+\begin{figure}[htbp]
+	\centering
+%	\includegraphics[width=1.0\textwidth]{figs06/fig2bw.pdf}	% OBS! print version bw
+	\includegraphics[width=1.0\textwidth]{figs06/fig2col.pdf}	% OBS! pdf version rgb
+%	\caption{Stacked bar chart depicting all significantly affected pathways as identified by gene expression profiling of osteosarcoma cell lines, showing percentages of downregulated (gray), not significantly altered (light gray), and upregulated (dark gray) genes, and genes which were not present on the microarray (white). The -log(adjP) (-log(B-H) p-value) is plotted in black, and is above 1.3 for adjP $<0.05$.} % OBS! caption for bw print file
+	\caption{Stacked bar chart depicting all significantly affected pathways as identified by gene expression profiling of osteosarcoma cell lines, showing percentages of downregulated (green), not significantly altered (gray), and upregulated (red) genes, and genes which were not present on the microarray (white). The -log(adjP) (-log(B-H) p-value) is plotted in orange, and is above 1.3 for adjP $<0.05$.}			%%% OBS! caption for rgb pdf file
+	\label{fig6.2}
+\end{figure}
+%
+Fourteen out of these 17 pathways play a direct or indirect role in genomic stability. Unsupervised hierarchical clustering of all cell line data and data from 84 osteosarcoma biopsies (GEO accession number GSE33382~\cite{kuijjer2012identification}) was performed on all DE genes present in these 17 significantly affected pathways, which resulted in a cluster of control cells and biopsies, and larger cluster of osteosarcoma cell lines and biopsies (Additional Figure~\ref{afig6.1}). Patients whose biopsies had expression profiles of these pathways similar to osteosarcoma cell lines showed worse metastasis\hyp{}free survival than patients with intermediate expression profiles, and than patients whose biopsies had expression profiles more similar to the control cultures, {\it i.e.} nontransformed primary mesenchymal cell cultures and osteoblast cultures (Logrank test for trend, p-value $=0.049$, Figure~\ref{fig6.3}).
+%
+\begin{figure}[htbp]
+  \centering
+  \begin{minipage}[b]{0.50\linewidth}
+%    \includegraphics[width=1\textwidth]{figs06/fig3bw.pdf}		% OBS! print version bw
+   \includegraphics[width=1\textwidth]{figs06/fig3col.pdf}	% OBS! pdf version rgb
+  \end{minipage}
+    \hfill
+  \begin{minipage}[b]{0.46\linewidth}
+     \caption{Kaplan\hyp{}Meier metastasis\hyp{}free survival analysis on data obtained from patient biopsies which clustered with osteosarcoma cell lines, biopsies clustering with control cell lines, and an intermediate group, based on gene expression of genes all present in the 17 significantly affected pathways (as in Additional Figure~\ref{afig6.1}). Logrank test for trend, p-value $=0.049$.}
+     \label{fig6.3}
+     \end{minipage}
+\end{figure}
+%
+Transcription factors were predicted to be activated or inhibited based on expression of target genes are shown in IPA. The most activated transcription factor was {\it MYC}, while the most inactivated transcription factor was {\it TP53}.
+
+\subsection{Kinome profiling of osteosarcoma cell lines}
+To obtain more information on the activity of the pathways which showed aberrant mRNA expression, we integrated mRNA expression data with data obtained with kinase PamChip\textregistered peptide microarrays. These peptide microarrays were incubated with lysates of the osteosarcoma cell lines 143B and U-2 OS, and with lysates of two MSC cultures. Kinases present in the cell lysates can, in the presence of ATP, phosphorylate the peptides present on the microarray, which is detected by fluorescently labeled antibodies. We compared kinome profiling data at different incubation times by intersecting lists of differentially phosphorylated peptides between osteosarcoma cells and MSCs, obtained by {\it LIMMA} analyses, as shown in Figure~\ref{afig6.5}.
+%
+\begin{figure}[htbp]
+  \centering
+  \begin{minipage}[b]{0.50\linewidth}
+%    \includegraphics[width=1\textwidth]{figs06/addfile5bw.pdf}		% OBS! print version bw
+   \includegraphics[width=1\textwidth]{figs06/addfile5rgb.pdf}		% OBS! pdf version rgb
+  \end{minipage}
+    \hfill
+  \begin{minipage}[b]{0.46\linewidth}
+     \caption{Comparison of peptide phosphorylation at different time points. {\it LIMMA} analyses were performed on different time points, ranging from 0 to 60 minutes of incubation with cell lysates. Venn diagrams show overlap of significantly differentially phosphorylated peptides between the consecutive time points.}
+     \label{afig6.5}
+     \end{minipage}
+\end{figure}
+%
+This data analysis demonstrated a large overlap in the detected differentially phosphorylated peptides, and a build-up of differentially phosphorylated peptides over time. Most peptides showed differential phosphorylation after 20 minutes of incubation with cell lysates. After 60 minutes of incubation on the peptide microarray, 49 peptides were detected to be significantly differentially phosphorylated between osteosarcoma cell lines and mesenchymal stem cells. These peptides are represented in Figure~\ref{fig6.4}.
+%
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=1.0\textwidth]{figs06/fig4col.pdf}	% pdf version also rgb
+	\caption{Supervised clustering of all 49 significantly differentially phosphorylated peptides identified by the comparison of two osteosarcoma cell lines with two MSC cultures. Peptides are sorted on logFC, from lower phosphorylation to higher phosphorylation in osteosarcoma cell lines. Orange: higher phosphorylation levels, blue: lower phosphorylation levels.}
+	\label{fig6.4}
+\end{figure}
+%
+As a reference, we performed an unsupervised hierarchical clustering including all technical replicates ({\it data not shown}), which showed that phosphorylation of peptides by cell lysates of most technical replicates was comparable.
+
+\subsection{Altered phosphorylation in genomic stability pathways}
+The significance of the 17 pathways that were returned from the pathway analysis on mRNA expression data was tested on kinome profiling results in IPA. In total, 7/17 pathways were significant in kinome profiling as well. These seven pathways were a subset of the 14 pathways with a known role in genomic stability. Most significantly differentially phosphorylated peptides in these seven pathways showed higher phosphorylation levels in osteosarcoma cell lines (Figure~\ref{fig6.5}), indicating that kinases affect phosphorylation of molecules playing a role in genomic stability.
+%
+\begin{figure}[htbp]
+	\centering
+%	\includegraphics[width=1.0\textwidth]{figs06/fig5bw.pdf}	% OBS! print version bw
+	\includegraphics[width=1.0\textwidth]{figs06/fig5col.pdf}	% OBS! pdf version rgb
+%	\caption{Stacked bar chart showing kinome profiling pathway analysis on the subset of pathways which were significant on gene expression profiling. Percentages of downregulated (gray), not significantly altered (light gray), and upregulated (dark gray) genes, and genes which were not present on the microarray (white) are shown. The -log(adjP) (-log(B-H) p-value) is plotted in black, and is above 1.3 for adjP $<0.05$.} % OBS! caption for bw print
+	\caption{Stacked bar chart showing kinome profiling pathway analysis on the subset of pathways which were significant on gene expression profiling. Percentages of downregulated (blue), not significantly altered (gray), and upregulated (orange) genes, and genes which were not present on the microarray (white) are shown. The -log(adjP) (-log(B-H) p-value) is plotted in orange, and is above 1.3 for adjP $<0.05$.}			%%% OBS! caption for col pdf file
+	\label{fig6.5}
+\end{figure}
+%
+
+\subsection{PI3K/Akt and AMPK signaling in osteosarcoma}
+Unsupervised pathway analysis on the kinome profiling results returned the IPA pathway PI3K/Akt signaling as the most significantly affected pathway in osteosarcoma cells (Figure~\ref{fig6.6}) and the AMPK pathway as second most significantly affected pathway.
+%
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=1.0\textwidth]{figs06/fig6col.pdf}	% pdf version also in rgb
+	\caption{The Akt signaling pathway in IPA. Blue: significantly lower, orange: significantly higher phosphorylation in osteosarcoma cell lines, gray, no significant difference in phosphorylation, white: no phosphorylation sites of the particular protein on the PamGene Ser/Thr chip. Blue lines indicate known downstream phosphorylation by the upstream kinase.}
+	\label{fig6.6}
+\end{figure}
+%
+Specifically, molecules directly downstream of Akt showed higher phosphorylation in osteosarcoma than in MSCs, while molecules downstream of AMPK showed lower phosphorylation levels. As these results indicate that Akt signaling is active in osteosarcoma and might be driving its high proliferative capacity, we set out to pharmacologically inhibit Akt using the compound MK-2206.
+
+\subsection{MK-2206 inhibits proliferation of U-2 OS and HOS, but not of 143B}
+We inhibited osteosarcoma and control cells for 120hrs with allosteric inhibitor MK-2206. Inhibition of the positive control leukemia cell line NALM-6, and of osteosarcoma cell line U-2 OS with MK-2206 was dose\hyp{}dependent, with IC$_{50}$s of 0.38$\upmu$M and 2.5$\upmu$M, and maximal responses of 94\% and 71\%, respectively (Figure~\ref{fig6.7}).
+%
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=1.0\textwidth]{figs06/fig7bw.pdf}	% pdf version also bw
+	\caption{Proliferation of osteosarcoma cell lines was inhibited with different concentrations of MK-2206, for 120hrs. NALM-6, U-2 OS, and HOS showed a dose\hyp{}dependent inhibition, while 143B did not respond.}
+	\label{fig6.7}
+\end{figure}
+%
+143B did not show any response at concentrations below 5$\upmu$M. Because 143B exhibits an oncogenic {\it KRAS} transformation, we assessed MK-2206 specificity on the parental cell line of 143B, HOS, which does not exhibit this transformation. HOS indeed responded similar to U-2 OS, with an IC$_{50}$ of 2.6$\upmu$M and maximal response of 62\%.
+
+\subsection{Different phosphorylation patterns upon treatment with MK-2206}
+As 143B and U-2 OS showed different sensitivities to MK-2206, we performed a paired analysis between kinome profiling data obtained from lysates of cells, which were treated with different concentrations of MK-2206, and for different treatment lengths. Overall, the phosphorylation patterns differed between both cell lines, and distances between treatment options within each cell line were smaller than between the cell lines (Figure~\ref{afig6.8}).
+%
+\begin{figure}[htbp]
+  \centering
+  \begin{minipage}[b]{0.65\linewidth}
+    \includegraphics[width=1\textwidth]{figs06/addfile8rgb.pdf}		% print version rgb pdf version also rgb
+  \end{minipage}
+    \hfill
+  \begin{minipage}[b]{0.31\linewidth}
+     \caption{Unsupervised hierarchical clustering depicting the distances between data obtained from kinome profiling of cells treated with different concentrations of MK-2206 and for different time intervals. 1\_30: treatment of 30min with 1$\upmu$M of MK-2206, etc.} %
+     \label{afig6.8}
+     \end{minipage}
+\end{figure}
+%
+We generated a heatmap of differential phosphorylation in the paired analysis of treated and untreated cells, depicting all peptides of the PamGene chip which are downstream of PI3K/Akt (Figure~\ref{fig6.8}). This figure shows that the inhibition pattern of MK-2206 is different in the two osteosarcoma cell lines, suggesting that other upstream kinases may be affected by inhibition of Akt with MK-2206 as well.
+%
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=1.0\textwidth]{figs06/fig8col.pdf}	% pdf version also in rgb
+	\caption{Unsupervised clustering depicting differential phosphorylation of peptides of the PI3K/Akt pathway by cell lysates treated with different concentrations of MK-2206 for different time intervals, as compared with untreated cells. Blue: logFC $<0$, orange: logFC $>0$. Different treatment options are shown in different shades of gray (from light to dark gray: 1$\upmu$M 5, 30, 180, and 960 minutes, and 10$\upmu$M 180 minutes of treatment with MK-2206. Light green: 143B, dark green: U-2 OS.}
+	\label{fig6.8}
+\end{figure}
+%
+
+\section{Discussion}\label{discussion6}
+Osteosarcoma is a highly genomically unstable tumor. The identification of specific molecular targets that drive oncogenesis and that might be targets for therapy may thereby be hampered. Genome\hyp{}wide gene expression profiling of high\hyp{}grade osteosarcoma cell lines, in fact, showed an enrichment in differential expression in pathways important in genomic stability (Figure~\ref{fig6.2}), with a role in cell cycle and checkpoint regulation ({\it e.g.} p53 signaling, G1/S and G2/M checkpoint regulation), DNA damage response ({\it e.g.} ATM signaling, role of BRCA1 in DNA damage response), and purine/pyrimidine metabolism. Most significantly differentially expressed genes in these pathways were upregulated, for example {\it DNA-PK}, {\it BRCA1}, and {\it CDC25A}. Some downregulated genes were detected as well, such as {\it CDKN1A}, which has an inhibitory role on cell cycle progression, and genes downstream of {\it TP53} ({\it e.g.} {\it THBS1} and {\it SERPINE1}, encoding TSP1 and PAI-1, respectively). Interestingly, as shown by unsupervised clustering on expression levels of genes of these pathways, osteosarcoma pretreatment biopsies can have profiles more similar to those of osteosarcoma cell lines, or more similar to profiles of the control cells. The first is associated with poor, while the latter is associated with good metastasis\hyp{}free survival. Expression profiles can also be of an intermediate type, with intermediate metastasis\hyp{}free survival (Additional Figure~\ref{afig6.1}, Figure~\ref{fig6.3}). This suggests that deregulated genomic stability is a key driver of osteosarcomagenesis, as was already previously reported~\cite{kuijjer2012identification}. IPA transcription factor analysis showed that {\it MYC} is the most significantly activated (z-score of 6.294), and {\it TP53} the most significantly inactivated (z-score of -7.660) transcription factor. Other highly predicted activated transcription factors are {\it e.g.} {\it E2F1/2/3}, whereas {\it CDKN2A} and {\it RB1} were detected as inactivated. These different genes are known to be affected in osteosarcoma~\cite{cleton2005central,kuijjer2012identification,mohseny2010small}. The role of these genes in cell cycle progression further confirms the importance of these pathways in osteosarcoma.
+
+As kinome\hyp{}wide screens have previously led to the detection of specific targets for treatment in other sarcoma types~\cite{schrage2009kinome,willems2010kinome}, we performed kinome profiling of osteosarcoma cell lysates. Since the pathways that were shown to be significantly affected on mRNA expression mostly contained Ser/Thr kinases, we selected a Ser/Thr peptide microarray---the Ser/Thr PamChip\textregistered. Pathway analysis on kinome profiling data showed that 50\% of the pathways that were significant on gene expression data were also significantly enriched in differential phosphorylation signals (Figure~\ref{fig6.5}). All significant peptides were higher phosphorylated in osteosarcoma cell lines, except for a peptide present in the gene {\it CREB1}. Since most of these peptides showed higher phosphorylation, we expect these pathways to be highly active, demonstrating higher cell cycling of the tumor cells, and deregulated responses to DNA damage.
+
+We next determined the most significantly affected pathways in the kinome data from the entire IPA canonical pathways database, and detected deregulation of the PI3K/Akt and AMPK signaling pathways. Molecules downstream of Akt showed higher phosphorylation (Figure~\ref{fig6.6}), while downstream of AMPK, lower levels of phosphorylation were detected. Akt and AMPK act antagonistically to regulate mTOR signaling through inhibitory and activating phosphorylation of TSC2, respectively~\cite{memmott2009akt}. The Akt pathway is one of the most commonly affected pathways in cancer, with active PI3K/Akt signaling leading to excessive cell growth and proliferation~\cite{engelman2006evolution,manning2007akt}. Inhibition of this pathway by targeting mTOR with agents such as rapamycin is effective in some cancer types~\cite{guertin2007defining}. In a recent phase II trial in bone and soft tissue sarcomas, inhibition of mTOR with ridaforolimus resulted in better progression\hyp{}free survival~\cite{chawla2012phase}. Inhibiting mTOR can, however, also activate a strong negative feedback loop from S6K1 to enhance Akt signaling~\cite{engelman2006evolution,guertin2007defining}. It may, therefore, be more effective to inhibit Akt itself. Inhibition of Akt was recently tested in a panel of xenografts of different pediatric cancers, and was most effective in osteosarcoma, with significant differences in event\hyp{}free survival in 6/6 xenografts~\cite{gorlick2012testing}. In addition, AMPK activators suppress growth of cell lines of various tumor types~\cite{vakana2012targeting}.
+
+We treated osteosarcoma cell lines with the allosteric Akt inhibitor MK-2206 (Selleck Chemicals LLC, Houston, TX). Inhibition of proliferation was dose\hyp{}dependent in U-2 OS (IC$_{50}$ $=2.5\upmu$M), but not in 143B (Figure~\ref{fig6.7}). Important to note is that active Akt signaling can be detected by kinome profiling in this cell line, but this does not necessarily imply that this pathway can also be fully inhibited, for example in the case that downstream actors in the same pathway cause a survival benefit for the cell line. As 143B is derived from the HOS cell line with a {\it KRAS} oncogenic transformation, we determined inhibitory effects of MK-2206 on HOS as well. HOS responded to MK-2206 in a similar manner as U-2 OS (IC$_{50}=2.6\upmu$M). This suggests that constitutive Ras/Raf/ERK signaling causes insensitivity to inhibition of the Akt pathway to MK-2206. Kinome profiling of cells treated with MK-2206 resulted in different phosphorylation patterns in 143B and U-2 OS of peptides of molecules in the PI3K/Akt pathway (Figure~\ref{fig6.8}). Differences between these cell lines were found in BAD Ser-99, of which phosphorylation was inhibited after treatment with MK-2206 in the responsive cell line U-2 OS, but stimulated in 143B, and in BAD Ser-118, where an opposite pattern was detected. BAD Ser-99 is the major site of Akt phosphorylation, while Ser-118 is the major site of PKA phosphorylation~\cite{hornbeck2004phosphosite}. Opposite patterns were also detected for TP53 Thr-18 and CDKN1A Thr-145/Ser-146, of which CDKN1A Thr-145 can also be directly phosphorylated by Akt. These results suggest that activity of other kinases may be affected by inhibition of Akt using MK-2206, or by MK-2206 itself. This depends on the cellular context, as we otherwise would not have expected to detect any differences in a paired analysis for the different conditions in each cell type.
+
+An important finding of our studies is that the PI3K/Akt and AMPK signaling pathways were detected with kinome profiling, while mRNA expression profiling did not result in the identification of these pathways. This suggests that in osteosarcoma, these pathways are regulated by phosphorylation rather than by transcriptional activity. Gene expression and protein synthesis imply a long time commitment of a cell to potential activation of its synthesized proteins. Phosphorylation, on the other hand, provides a very rapid way to mobilize extra catalytic power for a short time, and allows fine\hyp{}tuning of the activation of a pathway to the needs of a cell. This difference in time scale emphasizes the importance of applying different platforms for the analysis of a complex tumor as high\hyp{}grade osteosarcoma.
+
+\section{Conclusions}\label{conclusions6}
+In summary, this study shows that genomic stability pathways are deregulated on both mRNA and kinome levels, with most significantly affected genes being upregulated and/or phosphorylated. Akt was detected as most probably overactive in osteosarcoma, as downstream peptides were hyperphosphorylated as compared with MSCs. Akt inhibitor MK-2206 could inhibit 2/3 osteosarcoma cell lines. Based on these results, we conclude that Akt inhibitors and other drugs inhibiting the PI3K/Akt/mTOR pathway could have an effect on survival of osteosarcoma tumor cells.
+
+%%% references
+
+\begin{small}
+\begin{singlespace}
+\bibliographystyle{unsrtnatshort}		% sorted as referenced, was unsrtnat, but unsrtnatshort gives shorter output
+\bibliography{biblio}
+\end{singlespace}
+\end{small}
+
+%%% appendix
+% additional data file 3, now appendix figure 1
+\begin{subappendices}
+	\newpage
+	\setcounter{figure}{0}
+	\section{Additional Figures}
+		\renewcommand{\figurename}{Additional Figure}
+		%
+		\begin{figure}[h]
+		  \centering
+%		    \includegraphics[width=1\textwidth]{figs06/addfile3bw.pdf}	% OBS! bw print, this corresponds to bw fig 3, should be rgb in pdf file
+		    \includegraphics[width=1\textwidth]{figs06/addfile3rgb.pdf}	% OBS! rgb pdf, this corresponds to bw fig 3, should be rgb in pdf file
+%		    \caption{Unsupervised hierarchical clustering of osteosarcoma cell line data (black bars), control cultures (MSC: dark gray bars, osteoblast: light gray bars), and data from osteosarcoma biopsies (blue bars) on mRNA expression levels of all DE genes present in the 17 significantly affected pathways as determined by IPA. The different clusters selected for Kaplan\hyp{}Meier analysis are shown in the upper dendrogram in different shades of gray, corresponding to the legend of Figure~\ref{fig6.3}. Red: upregulation, green: downregulation.} % OBS! bw print version
+		    \caption{Unsupervised hierarchical clustering of osteosarcoma cell line data (black bars), control cultures (MSC: dark gray bars, osteoblast: light gray bars), and data from osteosarcoma biopsies (blue bars) on mRNA expression levels of all DE genes present in the 17 significantly affected pathways as determined by IPA. The different clusters selected for Kaplan\hyp{}Meier analysis are shown in the upper dendrogram in different shades of blue, corresponding to the legend of Figure~\ref{fig6.3}. Red: upregulation, green: downregulation.} %%% OBS! rgb version
+		     \label{afig6.1}
+		\end{figure}
+		%
+\end{subappendices}
+
+%\end{document}

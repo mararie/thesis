@@ -1,0 +1,851 @@
+% Marieke Kuijjer
+% 2013-02-15
+% chapter 07
+
+	%\documentclass[12pt,b5paper]{book}
+	%\setcounter{secnumdepth}{0}
+	%\setcounter{tocdepth}{1}
+	%\usepackage[hidelinks]{hyperref}
+
+%\begin{document}
+
+%%% title page
+
+\chapter{Identification of osteosarcoma driver genes by integrative analysis of copy number and gene expression data}\label{ch7}
+\thispagestyle{empty}				%%% to remove page number from first page of chapter, must be placed after calling the chapter
+
+\vfill
+
+\vspace{0.5cm}
+This chapter is based on the publication:
+\underline{Kuijjer ML}, Rydbeck H, Kresse SH, Buddingh EP, Lid AB, Roelofs H, B{\"u}rger H, Myklebost O, Hogendoorn PCW, Meza-Zepeda LA, Cleton-Jansen AM. {\it Genes Chromosomes Cancer}. 2012 Jul;51(7):696-706
+
+\newpage
+
+%%% main document
+
+\section{Abstract}\label{abstract7}
+High-grade osteosarcoma is a tumor with a complex genomic profile, occurring primarily in adolescents with a second peak
+at middle age. The extensive genomic alterations obscure the identification of genes driving tumorigenesis during osteosarcoma
+development. To identify such driver genes, we integrated DNA copy number profiles (Affymetrix SNP 6.0) of 32 diagnostic
+biopsies with 84 expression profiles (Illumina Human-6 v2.0) of high\hyp{}grade osteosarcoma as compared with its
+putative progenitor cells, {\it i.e.} mesenchymal stem cells ($n=12$) or osteoblasts ($n=3$). In addition, we performed paired analyses between copy number and expression profiles of a subset of 29 patients for which both DNA and mRNA profiles were available. Integrative analyses were performed in Nexus Copy Number software and statistical language R. Paired analyses
+were performed on all probes detecting significantly differentially expressed genes in corresponding {\it LIMMA} analyses. For
+both nonpaired and paired analyses, copy number aberration frequency was set to $>35\%$. Nonpaired and paired integrative
+analyses resulted in 45 and 101 genes, respectively, which were present in both analyses using different control sets. Paired
+analyses detected $>90\%$ of all genes found with the corresponding nonpaired analyses. Remarkably, approximately twice as
+many genes as found in the corresponding nonpaired analyses were detected. Affected genes were intersected with differentially expressed genes in osteosarcoma cell lines, resulting in 31 new osteosarcoma driver genes. Cell division related genes, such as {\it MCM4} and {\it LATS2}, were overrepresented and genomic instability was predictive for metastasis\hyp{}free survival, suggesting that deregulation of the cell cycle is a driver of osteosarcomagenesis.
+
+\section{Introduction}\label{introduction7}
+High-grade osteosarcoma is an aggressive primary
+bone tumor, which mostly occurs during
+adolescence, with a second peak at middle age,
+at the metaphysis of long bones. The tumor is
+characterized by aberrant production of osteoid
+matrix and by very complex karyotypes~\cite{raymond2002conventional,cleton2005central}.
+Since the introduction of DNA microarray technology,
+recurrent DNA copy number changes in
+human osteosarcoma tumor tissues have been
+identified by comparative genomic hybridization
+(CGH) and high\hyp{}density single nucleotide polymorphisms
+(SNP) microarray analysis. There is a
+general consensus about gain of chromosome
+arms 6p, 8q, and 17p, but many additional regions
+are reported as well~\cite{squire2003high,man2004genome,
+atiye2005gene,yen2009identification,kresse2010evaluation}. The effects of copy number
+alterations may be reflected by changes in expression
+of genes in the affected chromosomal
+regions. There are various publications on human
+osteosarcoma gene expression, but few show robust
+bioinformatics (as described by Kuijjer {\it et al}.~\cite{kuijjer2011mrna}). Often, small sample sizes and heterogeneity
+within groups result in only a small number of
+significant genes, on which usually no correction
+for multiple testing is applied. Another problem
+when studying osteosarcoma gene expression data
+is the lack of an osteosarcoma benign precursor
+lesion and its debated cell of origin---although it
+becomes clearer that the mesenchymal stem cell
+or its derivative is the progenitor of osteosarcoma~\cite{mohseny2009osteosarcoma,mohseny2011concise}. The disease seems to develop suddenly as
+a full\hyp{}blown tumor, rendering it difficult to detect
+early drivers of osteosarcomagenesis. We have
+previously determined differential expression
+related to specific clinical parameters~\cite{buddingh2011tumor,kuijjer2011mrna}. In addition, we
+have compared osteosarcoma with osteoblastoma---a
+benign tumor which develops at the
+same site as osteosarcoma, but which does not
+progress into the latter. This comparison of
+human osteosarcoma with a control tissue showed
+that cell cycle regulation is the most significantly
+altered pathway in osteosarcoma~\cite{cleton2009profiling}.
+
+There are advantages of integrating copy number
+and expression data when aiming to identify
+driver genes. First, copy number data analysis of
+tumors with complex genomic profiles may return
+numerous bystander or hitch\hyp{}hiker genes, as copy
+number alterations may occur not only because
+they are advantageous for the tumor but also as a
+result of general genomic instability. Regions of
+copy number alteration may therefore encompass
+no driver gene at all, or may include additional
+genes. Also, some genes with altered copy numbers
+may not be expressed in the tumor due to
+tissue\hyp{}specific expression. These aspects hamper
+the identification of drivers of tumorigenesis,
+especially when the number of recurrent genes in
+such tumors is high. Second, at the mRNA level,
+drivers affect downstream genes and switch on
+feedback mechanisms, again rendering it difficult
+to determine the real osteosarcoma drivers in a
+pool of differentially expressed genes~\cite{lee2008integrative}. Integration of DNA copy number and
+gene expression data filters out at least part of
+such bystanders and of genes that act downstream
+of drivers of tumorigenesis, because most
+of these genes have altered copy numbers, but no
+change in expression, or vice versa, while drivers
+are both amplified and upregulated, or deleted
+and downregulated. Particularly osteosarcoma is
+genetically extremely unstable and therefore
+genomic data analysis of this tumor type would
+benefit from an approach that distinguishes driver
+genes from the numerous more random genetic
+events.
+
+Nonpaired integrative analysis may be performed
+by determining recurrent regions of copy
+number alterations which have higher than
+expected numbers of differentially expressed
+genes. Paired integrative analysis is a more powerful
+method, because the relationship between copy
+number alterations and gene expression can be
+inferred in each specific sample, instead of being
+based on averaged quantities. A statistically correct
+method for paired integrative analysis of these different
+data types has not yet been defined. Paired
+integrative analysis is usually performed by selecting
+genes based on the correlation between gene
+expression and copy number levels, such as is performed
+by the recently published methods DR-Integrator~\cite{salari2010dr}
+and Regularized dual
+Canonical Correlation Analysis~\cite{soneson2010integrative}.
+However, gains and losses may not necessarily
+directly translate to the same quantity of change
+in expression levels~\cite{lee2008integrative}, and important
+genes may be overlooked this way. A method
+where paired integrative analysis is detected for
+specific chromosomal regions with altered genomic
+and transcriptional status does exist~\cite{bicciato2009computational},
+but this method is not optimal for tumors
+such as osteosarcoma with highly unstable
+genomes, since copy number values are normalized
+to the mean copy number over each array, and this
+mean value may be altered in such tumors. Two
+methods, PARADIGM and CNAmet, combine different
+types of data on a gene\hyp{}based level. In
+PARADIGM, integration of different data types is
+used to detect patient\hyp{}specific pathway activities~\cite{vaske2010inference}. CNAmet returns genes that
+show differential expression between samples with
+and without methylation and/or copy number
+alteration~\cite{louhimo2011cnamet}. This
+elegant approach may however hamper the identification
+of genes that are regulated by other frequently
+altered genes, such as {\it TP53} and {\it MDM2} in
+osteosarcoma.
+
+Aiming to identify osteosarcoma driver genes,
+we performed both nonpaired and paired integrative
+analyses on high\hyp{}grade osteosarcoma prechemotherapy
+biopsy data. We combined results
+from analyses as compared with different control
+sets---mesenchymal stem cells (MSCs) and osteoblasts,
+so that we did not exclude one of these
+proposed progenitors as the cell of origin of osteosarcoma.
+We show that the paired integrative
+analysis returns more affected genes than the
+nonpaired integrative analysis. There is an overrepresentation
+of genes involved in genomic stability
+in osteosarcoma samples. The identified
+genes may be important drivers in
+osteosarcomagenesis.
+
+\section{Materials and methods}\label{methods7}
+\subsection{Ethics statement}
+All biological material was handled in a coded
+fashion. Ethical guidelines of the individual European
+partner institutions were followed and samples
+and clinical data were handled in a coded
+fashion and stored in the EuroBoNeT biobank.
+
+\subsection{Patient material and cell lines}
+Genome\hyp{}wide expression profiling was performed
+on pretreatment diagnostic biopsies of 84
+resectable high\hyp{}grade osteosarcoma patients from
+the EuroBoNeT consortium (\url{www.eurobonet.eu}).
+Clinicopathological details of these samples can
+be found in Table~\ref{tab7.1}.
+%
+\begin{table}[htbp]
+	\centering
+	\small
+		\begin{tabular}[c]{|lcc|}
+		\hline
+		Category & Patient characteristics & Number of biopsies (\%)\\
+		\hline
+		Institution & LUMC, Netherlands & 36 (42.9)\\
+		& IOR, Italy & 12 (14.3)\\
+		& LOH, Sweden & 3 (3.6)\\
+		& Radiumhospitalet, Norway & 1 (1.2)\\
+		& WWUM, Germany & 32 (38.1)\\
+		Location primary tumor & Femur & 40 (47.6)\\
+		& Tibia/Fibula & 28 (33.3)\\
+		& Humerus & 11 (13.1)\\
+		& Axial skeleton & 1 (1.2)\\
+		& Unknown/other & 4 (4.8)\\
+		Histological subtype & Osteoblastic & 52 (61.9)\\
+		& Chondroblastic & 9 (10.7)\\
+		& Fibroblastic & 7 (8.3)\\
+		& Telangiectatic & 4 (4.8)\\
+		& Minor subtype & 11 (13.1)\\
+		& Unknown & 1 (1.2)\\
+		Huvos grade & 1 or 2 & 38 (45.2)\\
+		& 3 or 4 & 33 (39.3)\\
+		& Unknown/NA & 14 (16.7)\\
+		Metastasis at diagnosis & Yes & 14 (16.7)\\
+		& No & 69 (82.1)\\
+		& Unknown & 1 (1.2)\\
+		Sex & Male & 54 (64.3)\\
+		& Female & 29 (34.5)\\
+		& Unknown & 1 (1.2)\\
+		Age & $<20$ years & 64 (76.2)\\
+		& $>=20$ years & 19 (22.6)\\
+		& Unknown & 1 (1.2)\\
+		\hline
+		\end{tabular}
+\caption{Clinicopathological details.}
+	\label{tab7.1}  
+\end{table}
+%
+Human bone\hyp{}marrow\hyp{}derived
+MSCs were obtained from five osteosarcoma
+patients and seven healthy donors. Osteoblasts
+($n=3$) were derived from MSCs on
+osteogenic differentiation. MSCs and osteoblasts
+were characterized and handled as described~\cite{cleton2009profiling}. Copy number analysis
+was performed on 32 pretreatment diagnostic
+biopsies, of which 29 overlapped with the 84
+samples used for expression analysis.
+
+\subsection{Copy number microarray data analysis}
+Affymetrix Genome\hyp{}Wide Human SNP 6.0
+arrays (Affymetrix, Santa Clara, CA) were used
+for SNP data analysis. Genomic DNA preparation,
+labeling, hybridization, and scanning were
+performed as described by Kresse {\it et al}.~\cite{kresse2010evaluation}.
+Microarray data preprocessing was performed as
+described previously~\cite{pansuriya2011genome}.
+Hybridization quality was estimated by the genotype
+call rate using the Birdseed genotype calling
+algorithm in Genotyping Console (version 4.0,
+Affymetrix). Samples of poor quality were
+excluded from further analyses. We performed
+copy number analysis in Nexus software version
+5 (Biodiscovery, El Segundo, CA) using CNCHP
+log ratio files generated by Genotyping Console
+using 27 controls as a baseline, which is a subset
+of the reference set of 29 samples which was
+used by Pansuriya {\it et al}.~\cite{pansuriya2011genome}. We rejected two
+samples based on results from the quality control
+analysis in Genotyping Console. Circular Binary Segmentation (CBS)\hyp{}based SNPRank Segmentation
+was used to identify aberrant genomic
+regions. To be included as frequently aberrant, a
+copy number alteration was called when detected
+in at least 35\% of all cases. Correlation of copy
+number alterations with clinical data was performed
+in Nexus software, with correction for
+multiple testing.
+
+\subsection{Genome\hyp{}wide gene expression microarray data analysis}
+Osteosarcoma tissue handling, RNA isolation,
+synthesis of cDNA, cRNA amplification, hybridization
+of cRNA onto the Illumina Human-6 v2.0
+Expression BeadChips (Illumina, San Diego,
+CA), and microarray data processing and quality
+control in the statistical language R version 2.10~\cite{r2.10.0}
+were performed
+as described previously~\cite{buddingh2011tumor}.
+High correlations between these microarray
+data and corresponding qPCR results have
+been demonstrated previously~\cite{buddingh2011tumor}.
+Unsupervised hierarchical cluster analysis
+was performed using R package pvclust with
+default settings~\cite{suzuki2006pvclust}.
+
+\subsection{Data deposition}
+MIAME\hyp{}compliant copy number and gene
+expression data have been deposited in the GEO
+database (\url{www.ncbi.nlm.nih.gov/geo/}, superseries
+accession number GSE33383).
+
+\subsection{Detection of significantly differentially expressed genes}
+We performed a {\it LIMMA} analysis~\cite{smyth2004linear}
+in order to determine differential expression
+between high\hyp{}grade osteosarcoma samples ($n=84$)
+and control tissues---MSCs ($n=12$) and osteoblasts
+($n=3$). Also, gene expression differences between
+MSCs and osteoblasts were determined. We used a
+Benjamini and Hochberg False Discovery Rate
+(FDR) of 0.05 as cut-off for significance.
+
+\subsection{Nonpaired integrative analysis}
+Nonpaired integrative analysis was performed
+by importing lists of differentially expressed
+genes into the Copy Number module of Nexus
+software version 5. Based on the length of the
+gene list, Nexus software performs a Fisher's
+exact test in order to determine whether the
+number of differentially expressed genes in a
+specific region with a significant copy number
+alteration is larger than expected by chance.
+Genes present in such regions of copy number
+alteration with FDR\hyp{}adjusted p-values (Q-bounds
+in Nexus software) $<0.05$ were returned from
+this integrative analysis. We did not apply any
+restrictions on the size of copy number aberrations.
+A few small altered regions that did not
+encompass an entire gene were detected, but
+these regions did not return genes upon integration
+with expression data. Nexus software only
+reports genes which are both gained and overexpressed,
+or both deleted and downregulated.
+
+\subsection{Paired integrative analysis}
+For the paired integrative analysis, copy number
+data of all autosomal overlapping genes
+between the copy number and gene expression
+data were exported from Nexus software, and
+converted into a binary matrix containing all
+genes with a gain (1) and no gain (0), and a similar
+binary matrix for losses. As in the nonpaired
+integrative analysis, we did not apply any restrictions
+on the size of copy number alterations.
+Gene expression data of each probe for each sample
+were normalized against average gene expression
+values of the corresponding probes over all
+control samples (either expression data from 12
+MSCs or from three osteoblasts)---this was performed
+by subtracting the average expression of
+the control samples from the expression levels of
+the sample of interest, since these are log\hyp{}transformed
+expression values. For both analyses, only
+genes that were significantly differentially
+expressed between the 84 osteosarcoma samples
+and the specific control set were analyzed, in
+order to make sure that all genes returned from
+the integrative analysis were significantly differentially
+expressed. Subsequently, genes that overlapped
+between the copy number binary matrices
+and that matched the fold change of expression
+(upregulation for genes with gains, and downregulation
+for genes with losses) were returned as
+two-way contingency tables using scripts in R.
+Genes that were altered in two types of data
+were further filtered by applying the sample recurrence
+criterion of 35\%. This generated lists of
+recurrent two-way altered genes. The odds ratios
+for having both copy number and expression
+changes were calculated for different combinations,
+for instance gain and upregulation. We
+used Bonferroni corrected Chi-square or Fisher's
+exact p-values $<0.05$ to determine significance.
+
+\subsection{Gene set enrichment}
+GO term enrichment was tested using Bioconductor
+package {\it topGO}~\cite{alexa2006improved}. Lists
+of significantly affected genes were compared
+with all genes eligible for the analysis. GO terms
+with Fisher's exact p-values $<0.0001$, as calculated
+by the {\it weight01} algorithm from {\it topGO}, were
+defined significant.
+
+\subsection{Genomic instability scores and survival analysis}
+We calculated genomic instability scores for 83
+(out of the 84) osteosarcoma biopsies (for one sample
+no follow\hyp{}up data were available) and all controls,
+as well as for two normal bone samples
+(obtained from cancer patients at the Norwegian
+Radium Hospital), 20 osteosarcoma xenografts
+(Kresse {\it et al}., {\it unpublished data}, and Kuijjer {\it et al}.~\cite{kuijjer2011mrna}), 19 osteosarcoma cell lines~\cite{ottaviano2010molecular},
+and the HeLa cervical cancer cell line. For
+calculation of the genomic instability scores, we
+refer to the article by Carter {\it et al}.~\cite{carter2006signature}. In short,
+this method calculates per sample per probe the
+expression of that particular probe minus the
+mean expression of that probe over all samples.
+For each sample, the sum of these values for all
+probes present in the genomic instability signature
+is calculated. This value is then compared
+between all samples and thus gives a relative measure
+of genomic instability. We used 24 genes of
+the CIN25 signature, because for one gene no
+probe was present on the Illumina v2.0 BeadChip.
+For genes with multiple probes, we used the
+probe that showed the highest variation in expression
+levels. We determined metastasis\hyp{}free survival
+using the Kaplan\hyp{}Meier method and performed a
+Logrank test for trend using GraphPad Software
+(La Jolla, CA, www.graphpad.com).
+
+\section{Results}\label{results7}
+\subsection{Recurrent chromosomal regions with copy number aberrations in high\hyp{}grade osteosarcoma}
+Thirty two high\hyp{}grade osteosarcoma prechemotherapy
+biopsies were hybridized to Af\-fy\-met\-rix
+SNP 6.0 arrays in order to determine recurrent
+copy number alterations. In total, 67 regions with
+recurrent alterations were detected, of which 35
+regions had copy number gain, and 32 copy number
+loss (see Supporting Information Table 1 ({\it available online}~\cite{ch7additional})).
+Recurrent gains were present on chromosome
+arms 1p, 1q, 4p, 5p, 6p, and 8q, and losses on
+chromosome arms 1p, 1q, 2q, 3q, 6q, 7q, 8p, 10p,
+10q, 12p, 13q, 15q, 16p, and 16q. A genome\hyp{}wide
+frequency plot of copy number alterations is
+shown in Figure~\ref{fig7.1}.
+%
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=1.0\textwidth]{figs07/fig1bw.pdf}	% OBS! print version bw
+%	\includegraphics[width=1.0\textwidth]{figs07/fig1rgb.pdf}	% OBS! pdf version rgb
+	\caption{Genome\hyp{}wide frequency plot of copy number alterations on chromosomes 1--22 in 32 high\hyp{}grade osteosarcoma prechemotherapy biopsies. Left of the chromosomes: loss, right: gain.}
+	\label{fig7.1}
+\end{figure}
+%
+No significant correlation was
+detected for specific regions with copy number
+alterations and clinical information (tested clinical
+parameters are shown in Table~\ref{tab7.1}).
+
+\subsection{Comparison of osteoblasts and MSCs}
+Unsupervised hierarchical cluster analysis
+resulted in separate clusters for biopsies and cell
+lines. Within the cell line cluster, osteosarcoma
+cell lines formed one subcluster, whereas MSCs
+and osteoblasts formed a second subcluster (Supporting
+Information Figure 1 ({\it available online}~\cite{ch7additional})). This indicates that
+the control cell lines are more similar to one
+another than to osteosarcoma cells. On the basis
+of hierarchical clustering of gene expression data,
+we cannot determine the cell of origin of osteosarcoma.
+A total of $1,382$ genes were differentially
+expressed between osteoblasts and MSCs. GO
+term enrichment resulted in seven significant GO
+terms, which are represented in Supporting Information
+Figure 2 ({\it available online}~\cite{ch7additional}). In summary, GO term enrichment
+showed differences in cellular structure,
+proliferation, and apoptosis. Genes showing significant
+differences between both control cell
+types, however, can nonetheless be differentially
+expressed between osteosarcoma samples and
+both control cell types, thus can still be important
+drivers of osteosarcomagenesis. We therefore set
+out to select genes that showed differential
+expression in osteosarcoma as compared with
+both MSCs and osteoblasts.
+
+\subsection{Gene expression signature of high\hyp{}grade osteosarcoma}
+We detected $12,542$ and $2,939$ probes encoding
+for genes that were significantly differentially
+expressed between the 84 osteosarcoma biopsies
+and MSCs and osteoblasts, respectively. MA
+plots, showing log\hyp{}intensity ratios and log\hyp{}intensity
+averages for both analyses, are depicted in
+Supporting Information Figure 3 ({\it available online}~\cite{ch7additional}). A total of $1,679$
+probes overlapped between both analyses, of
+which $1,639$ were either up- or downregulated in
+both. GO term analysis on the genes represented
+by these $1,639$ probes showed an enrichment of
+apoptosis and signal transduction genes. Antigen
+processing and presentation, as well as angiogenesis
+were also overrepresented (Supporting Information
+Figure 4 ({\it available online}~\cite{ch7additional})).
+
+\subsection{Paired integrative analysis is more sensitive than nonpaired integrative analysis}
+Nonpaired integrative analysis was performed
+on data from 32 samples hybridized on SNP
+arrays and from 84 samples hybridized on gene
+expression arrays, whereas paired analysis was
+performed on a subset of 29 samples for which
+both SNP and expression data were available. In
+total, $16,105$ autosomal genes were represented
+both on SNP and on gene expression arrays.
+Nonpaired integrative analysis resulted in 253
+significantly affected genes in osteosarcoma biopsies
+versus mesenchymal stem cells, whereas 71
+genes were detected when osteoblasts were used
+as a control. A total of 45 genes were identified
+in both analyses versus MSCs and versus osteoblasts
+(Figure~\ref{fig7.2}).
+%
+\begin{figure}[htbp]
+  \centering
+  \begin{minipage}[b]{0.50\linewidth}
+    \includegraphics[width=1\textwidth]{figs07/fig2bw.pdf}		% OBS! print version bw
+%    \includegraphics[width=1\textwidth]{figs07/fig2rgb.pdf}	% OBS! pdf version rgb
+  \end{minipage}
+    \hfill
+  \begin{minipage}[b]{0.46\linewidth}
+    \caption{Venn diagram with numbers of affected genes in both nonpaired and paired analyses, and in osteosarcoma biopsies versus MSCs and versus osteoblasts. NP: nonpaired integrative analysis, P: paired integrative analysis, OB: analysis of osteosarcoma biopsies versus osteoblasts, MSC: analysis of osteosarcoma samples versus mesenchymal stem cells.}
+     \label{fig7.2}
+     \end{minipage}
+\end{figure}
+%
+Of these 45 genes, 23 were also
+detected in expression analyses of a panel of 19
+osteosarcoma cell lines~\cite{ottaviano2010molecular}
+versus MSCs and osteoblasts (Supporting Information
+Figure 5A ({\it available online}~\cite{ch7additional})). For the paired integrative analyses,
+we determined whether the number of genes
+with gain combined with overexpression and with
+loss combined with downregulation was higher
+than expected per sample, based on the numbers
+of copy number alterations and gene expression
+changes in the whole genome. This was true for
+most samples, as depicted in Figure~\ref{fig7.3}, in which the
+odds ratios and significance of data dependencies
+are shown.
+%
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=1.0\textwidth]{figs07/fig3rgb.pdf}	% pdf version also rgb
+	\caption{Dependence of gene copy number and gene expression data. The heatmaps depict odds ratios for the numbers of genes per sample which show gain and overexpression (overGain), gain and underexpression (underGain), loss and overexpression (overLoss), and loss and underexpression (underLoss). Chi-square tests, or, in case a group contained $<10$ genes, Fisher's exact tests, were performed in order to evaluate whether the number of genes reported from the integrative analysis was higher than expected by chance. $\ast$ Bonferroni\hyp{}corrected p-values $<0.05$. {\it A}, Osteosarcoma biopsies versus MSCs, {\it B}, versus osteoblasts.}
+	\label{fig7.3}
+\end{figure}
+%
+Paired integrative analysis resulted in
+445 and 138 genes when compared with MSCs
+and osteoblasts, respectively. A total of 101 genes
+overlapped between these different analyses (Figure~\ref{fig7.2}), and of this set, 31 genes were also detected in
+the cell line expression data (Supporting Information
+Figure 5B ({\it available online}~\cite{ch7additional}), Table~\ref{tab7.2}).
+%
+\begin{table}[htbp]
+	\centering
+	\small
+		\begin{tabular}[c]{|lcccc|}
+		\hline
+		Symbol & Cytoband & CNA & CNA freq (\%) & logFC\\
+		\hline
+		{\it CLCC1} & 1p13.3 & Gain & 41.4 & 1.24\\
+		{\it MCM4} & 8q11.21 & Gain & 37.9 & 1.35\\
+		{\it AKR1C3} & 10p15.1 & Loss & 37.9 & -1.94\\
+		{\it AKR1C4} & 10p15.1 & Loss & 37.9 & -1.34\\
+		{\it ARHGAP22} & 10q11.22 & Loss & 37.9 & -0.45\\
+		{\it PGBD3} & 10q11.23 & Loss & 41.4 & -0.82\\
+		{\it ARID5B} & 10q21.2 & Loss & 48.3 & -2.33\\
+		{\it REEP3} & 10q21.3 & Loss & 48.3 & -0.51\\
+		{\it HERC4} & 10q21.3 & Loss & 51.7 & -1.31\\
+		{\it PBLD} & 10q21.3 & Loss & 48.3 & -0.29\\
+		{\it RUFY2} & 10q21.3 & Loss & 48.3 & -0.20\\
+		{\it KIAA1279} & 10q22.1 & Loss & 43.1 & -0.57\\
+		{\it SRGN} & 10q22.1 & Loss & 43.1 & -2.26\\
+		{\it AIFM2} & 10q22.1 & Loss & 44.8 & -0.52\\
+		{\it CHST3} & 10q22.1 & Loss & 48.3 & -1.17\\
+		{\it FAS} & 10q23.31 & Loss & 44.8 & -0.42\\
+		{\it PCGF5} & 10q23.32 & Loss & 37.9 & -0.34\\
+		{\it PPP1R3C} & 10q23.32 & Loss & 37.9 & -2.89\\
+		{\it AVPI1} & 10q24.2 & Loss & 37.9 & -2.35\\
+		{\it BLOC1S2} & 10q24.31 & Loss & 37.9 & -0.51\\
+		{\it CASC2} & 10q26.11 & Loss & 44.8 & -0.18\\
+		{\it FAM45A} & 10q26.11 & Loss & 39.7 & -0.78\\
+		{\it ERCC6} & 13q11.23 & Loss & 41.4 & -0.52\\
+		{\it WASF3} & 13q12.13 & Loss & 44.8 & -2.43\\
+		{\it C13orf33} & 13q12.3 & Loss & 48.3 & -2.26\\
+		{\it LHFP} & 13q14.11 & Loss & 48.3 & -1.89\\
+		{\it WBP4} & 13q14.11 & Loss & 55.2 & -0.93\\
+		{\it TSC22D1} & 13q14.11 & Loss & 58.6 & -1.39\\
+		{\it RCBTB1} & 13q14.2 & Loss & 58.6 & -0.25\\
+		{\it LATS2} & 13q21.11 & Loss & 44.8 & -0.96\\
+		{\it DCUN1D3} & 16p12.3 & Loss & 37.9 & -1.39\\
+		\hline
+		\end{tabular}
+\caption{Candidate osteosarcoma driver genes. All frequencies and fold changes are mean values of both integrative analyses---osteosarcoma biopsies versus MSCs and osteosarcoma biopsies versus osteoblasts. For genes for which more than one probe was present on the array, the probe with the highest fold change was used. Cytoband: UCSC cytogenetic band, CNA: copy number aberration, CNA freq: copy number aberration frequency (for $n=29$), logFC: log fold change in biopsies (negative means downregulation, positive means upregulation).}
+	\label{tab7.2}
+\end{table}
+%
+Hence, paired analyses
+detected $>90\%$ of all genes found with corresponding
+nonpaired analyses. In addition, approximately
+twice as many genes as found in the
+corresponding nonpaired analyses were detected
+(Figure~\ref{fig7.2}, Supporting Information Figure 6 ({\it available online}~\cite{ch7additional})). Note that
+in the paired analysis fewer samples are included.
+Thus, paired analysis gives more robust results
+despite the lower sample size. Changing the
+threshold of FDR\hyp{}adjusted p-values in the nonpaired
+integrative analysis from 0.05 to 0.15 ({\it data
+not shown}) did not alter this ratio.
+
+\subsection{Genomic instability genes play a role in osteosarcoma progression}
+We calculated genome instability scores using
+the method of Carter {\it et al}.~\cite{carter2006signature}, which compares
+levels of gene expression of a previously
+defined genomic instability signature between
+samples in a dataset, for all osteosarcoma biopsies
+and different control tissues and cell lines (Figure~\ref{fig7.4}A).
+%
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=1.0\textwidth]{figs07/fig4bw.pdf}	% print version bw, pdf version bw
+	\caption{Genomic instability scores and metastasis\hyp{}free survival. {\it A}, Genomic instability scores for high\hyp{}grade osteosarcoma biopsies, normal bone, osteosarcoma xenografts and cell lines, the HeLa cell line, and mesenchymal stem cells (MSC) and osteoblasts (OB), as calculated by the method of Carter {\it et al}.~\cite{carter2006signature}. {\it B}, Metastasis\hyp{}free survival Kaplan\hyp{}Meier curves for four quartiles of genomic instability scores. {\it C}, Metastasis\hyp{}free survival Kaplan\hyp{}Meier curves for the total amount of genes with copy number gains and losses, using a cut-off based on the median amount of genes per sample showing copy number aberration.}
+	\label{fig7.4}
+\end{figure}
+%
+The osteosarcoma biopsies showed highly
+variable scores, whereas genomic instability scores
+for the controls, normal bone, MSCs, and osteoblasts
+were relatively low. High instability scores
+were detected for osteosarcoma xenografts, cell
+lines, and the HeLa cell line, in increasing order.
+This signature predicted for metastasis\hyp{}free survival
+in osteosarcoma samples as well (Figure~\ref{fig7.4}B),
+with high scores correlating with shorter metastasis\hyp{}free survival (Logrank test for trend p-value $=0.0112$).
+As expected, the total number of genes
+with copy number gains or losses, which is a direct
+measure of genomic instability from the SNP data,
+was predictive for progression as well (Logrank
+test p-value $=0.018$, Figure~\ref{fig7.4}C).
+
+\subsection{Candidate osteosarcoma driver genes}
+The 31 genes returned by the paired integrative
+analysis on clinical samples that also were
+differentially expressed in osteosarcoma cell lines
+are shown in Table 2, together with their chromosomal
+locations, aberration frequencies, and
+log fold changes. A total of 22/31 genes have
+been described to play a role in cancer. Interestingly,
+one third of these 22 genes have a role in
+cell cycle regulation, matching the importance of
+cell cycle and replication in osteosarcomagenesis
+as was found both using the genomic instability
+scores of the expression data and the overall chromosomal
+instability as detected in the copy number
+data (Figure~\ref{fig7.4}).
+
+\section{Discussion}\label{discussion7}
+In this study, we report copy number and gene
+expression alterations in high\hyp{}grade osteosarcoma
+prechemotherapy biopsies, and then integrate
+these data in order to detect osteosarcoma driver
+genes. Copy number analyses, which were
+obtained with high\hyp{}density SNP microarrays,
+showed very high genomic instability in the osteosarcoma
+biopsies. The pattern of aberrations is
+in line with previous studies using aCGH and
+SNP arrays, which show recurrent gains in chromosome
+arms 1p, 6p, and 8q, and losses in chromosome
+10. The previously reported recurrent
+amplification on chromosome arm 17p~\cite{squire2003high,man2004genome,atiye2005gene,yen2009identification}
+is not listed, because we used a
+very strict cut-off for aberration frequency (35\%).
+Aberration frequencies of 17\%~\cite{man2004genome}
+and 26\%~\cite{yen2009identification} were previously found
+on chromosome arm 17p, and a distinct amplification
+in 17p with an aberration frequency of 21\%
+can be seen in Figure 1. We chose such a high
+cut-off for recurrent aberrations in order to enrich
+for selected genetic events and exclude the
+numerous haphazard alterations that can be
+attributed to the high genomic instability of high\hyp{}grade
+osteosarcoma. In addition, we previously
+determined that this cut-off, as compared with
+cut-offs of 15\% and 50\%, showed the most consistent
+results in subsequent network and pathway
+analyses on osteosarcoma cell line SNP data
+({\it data not shown}). For genome\hyp{}wide gene expression
+analyses, both MSCs and osteoblasts were
+used as control cells, and we only considered
+overlapping genes between both comparisons, in
+order to make sure the affected genes were differentially
+regulated in osteosarcoma when compared
+with its putative progenitor cells. This
+analysis identified a large number ($n=1,639$) of 
+probes encoding for differentially expressed
+genes. Many of these genes encode tissue type\hyp{}specific
+proteins, as is shown in the GO term
+enrichment analysis, and appear as upregulated in
+osteosarcoma biopsies because the {\it in vitro} grown
+control cells, MSCs and osteoblasts, lack surrounding
+stroma and are nurtured under other
+conditions. Antigen processing and presentation
+as well as angiogenesis pathways were expected
+to be upregulated, as macrophages and other
+infiltrating cells are present in osteosarcoma tissue~\cite{buddingh2011tumor}, and as angiogenesis
+plays a role in osteosarcoma progression~\cite{lee1999cell}.
+Nevertheless, most stroma\hyp{}derived
+gene expression is filtered out by integration with
+copy number data, as this expression is not a
+result of underlying copy number changes. In
+addition to stroma\hyp{}related gene sets, GO term
+analysis showed enrichment in apoptosis and signal
+transduction genes, which are probably
+altered in the osteosarcoma tumor cells and not
+in the stroma. Because genes with concordant
+changes in copy number and gene expression are
+likely to be enriched in drivers of tumorigenesis,
+we performed integrative analyses on both types
+of data.
+
+We found a remarkable increase in significant
+differential genes in paired compared with nonpaired
+analysis, {\it i.e.} 101 versus 45. In general,
+paired integrative analysis was advantageous over
+nonpaired integrative analysis, identifying roughly
+twice as many genes, also when different aberration
+frequency cut-offs or less stringent cut-offs
+for significance were used in the nonpaired analysis.
+Nonpaired analysis as performed in Nexus
+software compares the number of differentially
+expressed genes in a region of copy number aberration
+with the expected number of differentially
+expressed genes, which is based on the total
+number of differentially expressed genes over the
+whole genome. This method may be too rigorous,
+because an altered copy number region may
+encompass tissue\hyp{}specific genes, which may not
+be expressed in the particular tumor tissue.
+These genes then have altered copy number, but
+no difference in expression. If an altered copy
+number region contains a relatively large number
+of such genes plus only a few candidate drivers,
+the entire region will be removed from the output
+of the analysis, which increases the amount
+of false negatives. Moreover, in the cancer gene
+expression profile, a large number of genes downstream
+of drivers, {\it i.e.} directly or indirectly regulated
+by drivers, or present in feedback loops will
+be differentially expressed. This increases the
+total number of differentially expressed genes,
+which again lowers the chance that a specific
+altered region is returned from the nonpaired
+integrative analysis as significantly affected. Furthermore,
+a single differentially expressed gene
+in a certain region of copy number alteration may
+still exert its driving function, and this driving
+function usually does not depend on the proportion
+of differentially expressed genes in the same
+region. Because of this, and because our method
+of paired integrative analysis is gene\hyp{}based and
+not region\hyp{}based, we did not perform a correction
+based on the total number of differentially
+expressed genes when compared with the
+affected copy number regions in the paired analysis
+in R, and this may be an additional reason
+why more genes are returned from the paired
+analysis. However, in all samples, except for one
+(L3438), the number of genes showing both copy
+number alteration and differential expression was
+higher than expected when compared with the
+numbers of copy number alterations and differentially
+expressed genes over the whole genome.
+This was significant for the vast number of samples
+(28/29, 23/29, 27/29, and 23/29, for combinations
+gain and overexpression, loss and
+underexpression in biopsies versus MSCs, and
+gain and overexpression, loss and underexpression
+in biopsies versus osteoblasts, respectively,
+as shown in Figure~\ref{fig7.3}).
+
+Genomic instability scores showed that the
+instability in osteosarcoma tissues ranges from a
+level comparable to that of the controls, to the
+high instability levels of repeatedly passaged
+tumors in xenografts and osteosarcoma cell lines.
+We demonstrated both on copy number data, as
+well as by applying a genomic instability gene
+signature to genome\hyp{}wide gene expression data,
+that high genomic instability in osteosarcoma is
+correlated with poor metastasis\hyp{}free survival. This
+suggests that genes playing a role in genomic
+instability may be potent drivers of osteosarcoma
+progression, as has been reported for various
+other tumor types~\cite{carter2006signature}. Paired
+integrative analysis confirmed this result, as one
+third of the genes with a possible role in tumorigenesis
+had a function connected to the cell
+cycle. Of these genes, {\it MCM4} showed gain and
+overexpression and was only detected by the
+paired integrative analysis. {\it MCM4} is part of the
+minichromosome maintenance complex, which
+functions as a replication helicase, with a role in
+maintaining genomic stability~\cite{aguilera2008genome}. This gene has been
+reported overexpressed in various tumor types~\cite{freeman1999minichromosome,alison2002minichromosome,majid2010regulation}. Genes that were detected in both
+nonpaired and paired analyses were all deleted
+and underexpressed. {\it AVPI1}, or arginine vasopressin\hyp{}induced 1, may be involved in cell cycling~\cite{apweiler2011ongoing}. {\it ERCC6} is involved
+in transcription\hyp{}coupled nucleotide excision
+repair, which is a critical survival pathway protecting
+against cancer~\cite{fousteri2008transcription}. {\it RCBTB1}, a candidate tumor suppressor,
+was recently shown to have growth inhibitory activity
+in osteosarcoma cells by regulating pathways
+of DNA damage/repair and apoptosis~\cite{zhou2010clld7}.
+{\it LATS2}, or large tumor suppressor
+homolog 2, plays a critical role in centrosome
+duplication, maintenance of mitotic fidelity,
+and genomic instability~\cite{visser2010lats}.
+Positive feedback between the p53 and Lats2 tumor
+suppressors prevents tetraploidization~\cite{aylon2006positive},
+which could be an initiating step in
+osteosarcomagenesis, leading to genomic instability~\cite{ganem2007limiting,ganem2007tetraploidy}. Also, a role of Lats2 in quenching of the
+increased genomic instability of H-Ras\hyp{}induced
+transformation has been identified~\cite{aylon2006positive}. {\it DCUN1D3} encodes for a UVC\hyp{}responsive
+protein involved in cell cycle progression and cell
+growth~\cite{ma2008dcun1d3}. Additional candidate
+genes with no direct role in cell cycle regulation
+include for example genes with a role in apoptosis
+({\it AIFM2}, {\it BLOC1S2}, {\it FAS}) and metabolism
+({\it AKR1C3} and {\it -4}). Some previously reported
+genes with a driver role in osteosarcoma were not
+identified, mainly because our high cut-off for
+recurrence. For example, {\it CDKN2A}, {\it MDM2}, and
+{\it E2F2} had recurrence frequencies of 28\%, 17\%,
+and 34\%, respectively (in the dataset of 29 samples).
+{\it CDKN2A} and {\it MDM2} were not significantly
+differentially expressed, but {\it E2F2} was consistently
+significantly overexpressed with log fold
+changes $>1.50$ in all analyses (biopsies and cell
+lines as compared with different controls). {\it TP53}
+and {\it RB1} aberrations were present in $>35\%$ of all
+samples (38\% and 69\%, respectively). {\it TP53} was
+significantly downregulated in biopsies as compared
+with both controls, but not in the osteosarcoma
+cell line dataset. {\it RB1} showed significant
+downregulation when compared with MSCs, but
+not with osteoblasts, indicating a difference
+between these controls in {\it RB1} signaling. We set
+our cut-off for recurrence to 35\% and only
+selected genes present both in osteosarcoma
+biopsies as well as in cell lines as compared with
+two different control sets, in order to select for
+the most important osteosarcoma drivers. Using
+this method, we were able to detect previously
+unreported driver genes.
+
+In summary, we have shown that an individual
+gene\hyp{}based paired integrative analysis of copy
+number and gene expression data performs better
+than a region\hyp{}based nonpaired analysis. Several
+osteosarcoma candidate driver genes, especially
+genes playing a role in cell cycle progression,
+have been identified. Additional research, particularly
+functional studies, should reveal whether
+these genes are early or late drivers in
+osteosarcomagenesis.
+
+%%% references
+
+\begin{small}
+\begin{singlespace}
+\bibliographystyle{unsrtnatshort}		% sorted as referenced, was unsrtnat, but unsrtnatshort gives shorter output
+\bibliography{biblio}
+\end{singlespace}
+\end{small}
+
+%\end{document}

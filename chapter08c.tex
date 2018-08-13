@@ -1,0 +1,253 @@
+% Marieke Kuijjer
+% 2013-02-15
+% chapter 06
+
+	%\documentclass[12pt,b5paper]{book}
+	%\setcounter{secnumdepth}{0}
+	%\setcounter{tocdepth}{1}
+	%\usepackage[hidelinks]{hyperref}
+
+%\begin{document}
+
+%%% title page
+
+\chapter{Frequent loss of heterozygosity and amplification in high-grade osteosarcoma: analysis of recurrent tumor suppressor genes}\label{ch8}
+\thispagestyle{empty}				%%% to remove page number from first page of chapter, must be placed after calling the chapter
+
+\vfill
+
+\vspace{0.5cm}
+This chapter is based on the manuscript:
+\underline{Kuijjer ML}, Liebelt F, Rydbeck H, Myklebost O, Meza-Zepeda LA, Szuhai K, Hogendoorn PCW, Cleton-Jansen AM. \emph{In preparation}
+
+\newpage
+
+%%% main document
+
+\section{Abstract}\label{abstract8}
+High-grade osteosarcoma is an aggressive primary bone tumor, with a peak incidence at adolescence. Osteosarcoma karyotypes are heterogeneous, and characterized by a high degree of genomic instability, rendering it difficult to detect recurrent driver genes in this tumor type. By performing Affymetrix SNP 6.0 microarray data analysis of 29 prechemotherapy biopsies, we observed that loss of heterozygosity (LOH) often cooccurs with copy number gains. We performed paired integrative analysis with genome\hyp{}wide expression data in order to determine which genes show differential expression in regions of LOH and gain, and integrated data from biopsies with data from 12 cell lines, which resulted in the identification of 29 recurrent genes with LOH, gain, and overexpression. We validated LOH of candidate tumor suppressor genes by Sanger sequencing and screened for mutations in candidate genes, as osteosarcoma cells may have selected for LOH and amplification of mutated tumor suppressors. We did not identify recurrent mutations, suggesting that these genes do not have a tumor driving function. Fluorescence in situ hybridization (FISH) analysis of candidate gene {\it XRCC6BP1} showed that this gene was present on homogeneous staining regions (HSRs) in 1/2 cell lines. As we detected a large number of recurrent candidate oncogenes by paired integrative analysis of LOH, gain, and overexpression, it may be valuable to determine whether these candidate oncogenes are present on HSRs in osteosarcoma.
+
+\section{Background}\label{introduction8}
+High-grade osteosarcoma is the most frequent primary malignant bone tumor, affecting roughly five persons in a population of one million each year~\cite{raymond2002conventional}. The tumor is highly aggressive, leading to distant metastases in approximately 45\% of all patients. Since the introduction of neoadjuvant chemotherapy in the 1970s, survival profiles have reached a plateau. In order to identify specific targets for therapy it is important to screen for recurrent driver genes in osteosarcoma. High\hyp{}grade osteosarcoma karyotypes are characterized by a high level of genomic instability, often harboring numerous numerical and structural changes, and high degree of aneuploidy~\cite{cleton2005central}. This results in many frequently affected genes in osteosarcoma, which may not all be important drivers, and thus renders it difficult to determine which genes are true drivers of osteosarcomagenesis. Integration of genomic and transcriptomic data will filter out most bystander and tissue\hyp{}specific genes, and can thereby result in a more specific list of candidate recurrent drivers. We previously detected novel osteosarcoma driver genes by integrating high\hyp{}throughput copy number and gene expression data~\cite{kuijjer2012identification}. Zygosity status can also be retrieved from SNP microarray data, which we describe in the present study.
+
+Loss of heterozygosity (LOH) and allelic imbalance have been studied in osteosarcoma to quite some extent, and several recurrent regions have been described in detail~\cite{johnson2003determination,deshpande2006phc3,yen2009identification,kresse2009lsamp,pasic2010recurrent}. Smida {\it et al}. reported that the amount of LOH negatively correlated with survival~\cite{smida2010genomic}. This may be a readout of general genomic instability of the tumor, as for multiple human cancers~\cite{carter2006signature}, including osteosarcoma~\cite{kuijjer2012identification}, it has been shown that genomic instability is predictive for survival, but LOH of specific regions may play an important role in tumorigenesis of osteosarcoma. Loss of heterozygosity caused by the loss of one allele may cause downregulation of the transcript, which may especially be relevant for tumorigenesis when an affected tumor suppressor gene shows haploinsufficiency~\cite{berger2011continuum}. In osteosarcoma, {\it TP53}, {\it RB1}, and {\it PTEN} are frequently deleted~\cite{cleton2005central}, and these genes could drive tumorigenesis by haploinsufficiency, although one study found that the LOH state of {\it RB1} is not associated with prognosis~\cite{heinsohn2007determination}. {\it CDKN2A}, another tumor suppressor often affected in osteosarcoma, also shows hemizygous losses which may have a role in tumorigenesis, although small homozygous deletions in this gene are also seen~\cite{mohseny2010small}. {\it LSAMP} is frequently focally deleted in osteosarcoma, and may have a role as haploinsufficient tumor suppressor~\cite{yen2009identification,kresse2009lsamp,pasic2010recurrent}. Copy neutral LOH (CN-LOH), which is LOH without change in copy number, may play a role in tumorigenesis as well, as is for example shown in hematological malignancies~\cite{o2010copy}. In a study of osteosarcoma samples on Affymetrix 10 K 2.0 SNP arrays, it was reported that 28\% of LOH events result from CN-LOH~\cite{yen2009identification}. Regions of LOH accompanied by gains have not yet been discussed in high\hyp{}grade osteosarcoma, but have been described in other cancer types, {\it e.g.} in lung cancer~\cite{harris2011both} and triple-negative breast cancer~\cite{ha2012integrative}. Tumor cells could in theory select for a region of amplified LOH in case a mutated tumor suppressor with a gain\hyp{}of\hyp{}function or partial dominant negative function is affected, with deletion of the wild\hyp{}type gene and amplification and overexpression of the mutated gene. Another advantage for the tumor of stretches of LOH accompanied by gains is that tumor suppressors with inactivating mutations and oncogenes can have tumor\hyp{}promoting activities at the same time~\cite{bacolod2009emerging}.
+
+In the present study, we analyzed high\hyp{}throughput SNP data of osteosarcoma pretreatment biopsies, and detected that LOH is often accompanied by copy number gains. By paired integrative analysis of LOH, copy number gain, and gene expression of osteosarcoma biopsy and cell line data, we identified 29 candidate driver genes, exhibiting both LOH and copy number gains. Gene set enrichment on genes in regions of LOH accompanied by gains and overexpression of the transcript returned pathways important in tumorigenesis and genomic instability. We validated a selection of candidate tumor suppressor genes by Sanger sequencing and Fluorescence In Situ Hybridization (FISH). Mutation analysis of a selection of candidate tumor suppressors did not reveal any recurrent mutations. Further studies need to be performed to determine the role of drivers in these regions.
+
+\section{Methods}\label{methods8}
+\subsection{SNP microarray data analysis}
+Previously published Affymetrix Genome\hyp{}Wide Human SNP 6.0 arrays were used for SNP microarray data analysis of high\hyp{}grade osteosarcoma pretreatment biopsies (GEO accession number GSE33383) and of high\hyp{}grade osteosarcoma cell lines (GEO accession number GSE36003). Microarray data preprocessing was performed as described in Pansuriya {\it et al}.~\cite{pansuriya2011genome}. We previously described quality control and detection of aberrant regions~\cite{kuijjer2012identification}. We used recommended settings for detection of LOH and allelic imbalance in Affymetrix SNP 6.0 data---a minimum LOH length of 500 kb, a homozygous frequency threshold of 95\%, a homozygous value threshold of 0.8, and a heterozygous imbalance threshold of 0.4. High gain, gain, and losses were defined using log$_2$ ratio cut-offs of 0.6, 0.2, and -0.2, respectively, which are slightly more conservative cut-offs than recommended by the software (0.6, 0.18, and -0.18 for Affymetrix SNP 6.0 data). We selected 29 patients for which gene expression microarray data were available, so that we could perform a paired integrative analysis. Of the 19 cell lines, 12 passed our quality control (143B, HAL, HOS, IOR/MOS, IOR/OS10, IOR/OS15, IOR/SARG, KPD, MG-63, MNNG-HOS, OSA, and SAOS-2). For all cell lines, expression data was available. Aberration frequency cut-offs of 5\% (at least 2 samples out of 29) and of 15\% (at least 2 samples out of 12) were used to detect recurrent regions in biopsies and in cell lines, respectively.
+
+\subsection{Genome\hyp{}wide gene expression microarray data analysis}
+Genome\hyp{}wide gene expression Illumina Human-6 v2.0 microarray data were previously published (GEO accession number GSE33383 for biopsies, GSE42351 for osteosarcoma cell lines). Microarray data processing and quality control in the statistical language R version 2.14~\cite{r2.14.0} were performed as described previously~\cite{buddingh2011tumor}. Mesenchymal stem cells (MSCs, $n=12$) and osteoblasts ($n=3$) were used as control samples, as described by Kuijjer {\it et al}.~\cite{kuijjer2012identification} (GEO accession number GSE33383).
+
+\subsection{Paired integrative analyses}
+A detailed description of the paired integrative analysis can be found in Kuijjer {\it et al}.~\cite{kuijjer2012identification}. For this study, we generated different binary files, including all genes that showed both LOH and copy number loss (1) or not (0), and LOH and copy number gain (1) or not (0). Gene expression data were normalized against average gene expression of the corresponding probes over all control samples (MSCs or osteoblasts). Different from our previous study, we included all genes---not only the subset of genes with significant differential expression. Genes were determined to be affected when frequencies of recurrent aberrations were higher than 5\% and log fold changes $>1$. Finally, only overlapping genes between analyses with both control samples were considered of interest.
+
+\subsection{GO term enrichment}
+Gene set enrichment was performed using Bioconductor package {\it topGO}~\cite{alexa2006improved}. Lists of significantly affected genes were compared with all genes eligible for the analysis. GO terms with Fisher's exact p-values $<0.001$, as calculated by the {\it weight01} algorithm from {\it topGO}, were defined significant.
+
+\subsection{Other statistical analyses}
+Comparisons between the number of genes with both LOH and loss, and with both LOH and gain were performed using Pearson's chi-square test. All p-values were below $0.001$.
+
+\subsection{Primer design}
+Primers for PCR amplifications were designed with a universal M13 tail in order to be able to use one set of universal primers for all sequencing reactions (M13 tail forward 5'-TGTAAAACGACGGCCAGT-3' and reverse 3'-CAGGAAACAGCTATGACC-5'). In order to first validate the LOH detected with the SNP arrays, we selected Affymetrix SNP probes for {\it XRCC6BP1}, {\it RASD1}, and {\it LLGL1} according to the population frequencies of the specific SNPs. Population frequency data from Affymetrix validation studies (\url{www.Affymetrix.com}) were assessed in order to select probes with frequencies close to an even distribution (50\%/50\%). We determined the number of SNPs to be evaluated for each gene by minimizing the chance of false positive homozygosity to less than 5\%. Primers were designed up- and downstream of the SNPs using Primer 3 (\url{www.Primer3.com}) and the UCSC genome browser (\url{www.genome.ucsc.edu}). Primer sequences can be found in Additional Table~\ref{atab8.1}. For mutation analysis primers were designed for the exons of {\it XRCCBP1}, {\it PLEKHO1}, and {\it TCC19} using Primer 3 (\url{www.Primer3.com}) and the UCSC genome browser (\url{www.genome.ucsc.edu}) (Additional Table~\ref{atab8.2}).
+
+\subsection{Sanger sequencing}
+The procedure for PCR amplification is described in Rozeman {\it et al}.~\cite{rozeman2005absence}. The following PCR protocol was used: 5min at 95$^\circ$C, 3 cycles of 10sec at 95$^\circ$C and 10sec of 60$^\circ$C, followed by 10sec of 72$^\circ$C. Sequencing was performed at Macrogen (Macrogen Europe, Amsterdam, the Netherlands), Baseclear (Leiden, the Netherlands), and the Leiden Genome Technology Center (Leiden, the Netherlands). Sequences were analyzed with the Mutation Surveyor software, Softgenics (State College, PA) and Chromas software (Technelysium Pty Ltd, Helensvale, Australia).
+
+\subsection{Fluorescent in situ hybridization (FISH)}
+Metaphase preparations of osteosarcoma cell lines KPD and SAOS-2 and of a control cell line were obtained using colcemid as in Pajor {\it et al}.~\cite{pajor1998combined}. The BAC probe for {\it XRCC6BP1} (BAC/Fosmid ID RP1160O7) was ordered from the BacPac Resource Centre at Children's Hospital Oakland Research Institute (Oakland, CA) and was labeled with biotin\hyp{}16-2'\hyp{}deoxyuridine\hyp{}5'\hyp{}triphosphate (Bio-16-dUTP) using a Nick translation method. The centromere probe for chromosome 12~\cite{pajor1998combined} was labeled with digoxigenin\hyp{}11-dUTP. For immunodetection, the following antibodies were used: streptavidin\hyp{}Texas Red ($1:100$), mouse\hyp{}anti\hyp{}digoxin ($1:1,000$), goat\hyp{}anti\hyp{}streptavidin\hyp{}bio ($1:100$), rabbit\hyp{}anti\hyp{}mouse\hyp{}FITC ($1:1,000$), and goat\hyp{}anti\hyp{}rabbit\hyp{}FITC ($1:100$). FISH was scored by counting red and green probes in 50 metaphase and 50 interphase nuclei per cell line.
+
+\section{Results}\label{results8}
+\subsection{LOH and allelic imbalance in osteosarcoma biopsies}
+We set out to determine recurrent LOH in high\hyp{}grade osteosarcoma. From SNP data analysis, we could demonstrate that LOH and allelic imbalance was detected less frequently than CN gains and losses (Figure~\ref{fig8.1}).
+%
+\begin{figure}[htbp]
+	\centering
+%	\includegraphics[width=1.0\textwidth]{figs08/fig1bw.pdf}	% OBS! print version bw
+	\includegraphics[width=1.0\textwidth]{figs08/fig1rgb.pdf}	% OBS! pdf version rgb
+%	\caption{This figure shows the distribution of frequencies of LOH (black, left of chromosomes) and allelic imbalance (black, right of chromosomes) on a background of frequencies of copy number losses (gray, left of chromosomes) and gains (gray, right of chromosomes) for the 29 osteosarcoma biopsies.} % OBS! for print version bw
+	\caption{This figure shows the distribution of frequencies of LOH (blue) and allelic imbalance (purple) on a background of frequencies of copy number gains (green) and losses (red) for the 29 osteosarcoma biopsies.}	%%% OBS! for pdf version different text rgb
+	\label{fig8.1}
+\end{figure}
+%
+Recurrent LOH (frequency $>5\%$) was detected for 9.4\% of all analyzed genes. The highest percentage of recurrent LOH detected in this dataset was 35\%. Recurrent allelic imbalance was seen in 0.14\% (23 genes), while recurrent total allelic loss was detected in 0.16\% (25 genes, including {\it TP53} and {\it RB1}) of all analyzed genes, with highest recurrent frequencies of 7\% and 55\%, respectively.
+
+\subsection{LOH is often accompanied by copy number gains }
+On average, 0.05\% of all genes show LOH and loss of DNA. A chi-square test demonstrated that LOH and loss occurred less frequent than expected (log odds $-1.55$, p-value $<0.0001$). Also copy neutral LOH occurred less frequent than expected (log odds $-1.75$, p-value $<0.0001$). Based on a comparison of the allelic ratio overview of the genome with CN gains and losses, LOH appears to often cooccur with gain at the other allele (Figure~\ref{fig8.1}). On average, 1.10\% of all genes show LOH and gain at the other allele in the same sample. Chi-square test verified that LOH accompanied by copy number gains indeed occurred more frequently than expected (log odds $2.44$, p-value $<0.0001$).
+
+\subsection{Integration of LOH, gain, and differential expression}
+In order to identify genes present in regions of LOH and gain (LOH-gain) which also were differentially expressed and hence may have a tumor driving function, we performed paired integrative analyses of LOH-gain and expression in the dataset of osteosarcoma pretreatment biopsies. Paired integrative analysis of these biopsies as compared with MSCs resulted in 148 up- and 17 downregulated genes in combination with LOH-gain, while the analysis where osteoblasts were used as a control resulted in 135 up- and 9 downregulated genes in combination with LOH-gain. Of these affected genes, 114 upregulated and 5 downregulated genes overlapped between both analyses. 
+
+The same approach was taken for the analysis of high\hyp{}grade osteosarcoma cell line data. This analysis returned 137 up- and 44 downregulated genes in combination with LOH-gain in osteosarcoma compared with MSCs, and 134 up- and 35 genes when compared with osteoblasts. In total, 97 upregulated genes and 20 downregulated genes overlapped. Of the 119 genes being over- and underexpressed together with LOH-gain in osteosarcoma biopsies as compared with MSCs and osteoblasts, 29 showed recurrent LOH-gain in combination with significant differential overexpression in both analyses of osteosarcoma cell lines (Figure~\ref{fig8.2}A).
+%
+\begin{figure}[htbp]
+  \centering
+%    \includegraphics[width=1\textwidth]{figs08/fig2bw.pdf}		% OBS! print version bw
+   \includegraphics[width=1\textwidth]{figs08/fig2rgb.pdf}	% OBS! pdf version rgb
+    \hfill
+     \caption{Depicted are the numbers of returned genes from the paired integrative analysis on LOH with gain and {\it A}, upregulation or {\it B}, downregulation, as compared with MSCs or osteoblasts (OB), in both osteosarcoma biopsies and cell lines.}
+     \label{fig8.2}
+\end{figure}
+%
+No genes showing LOH and CN gain together with downregulation overlapped (Figure~\ref{fig8.2}B).
+
+\subsection{Involvement of cell cycle pathways}
+GO term enrichment was performed on the 29 affected genes obtained with the analysis of biopsies and cell lines. This resulted in three significant GO terms---S-phase of mitotic cell cycle (GO:0000084), double\hyp{}strand break repair via non\hyp{}homologous end\hyp{}joining (GO:0006303), and M/G1 transition of mitotic cell cycle (GO:0000216), including genes such as {\it CDK4}, {\it MCM4}, and {\it XRCC6BP1} (Table~\ref{tab8.1}). Literature review (\url{www.genecards.org}) indicated that 17/29 genes may have an oncogenic role and 2/29 a tumor suppressive role.
+%
+	\begin{table}[htbp]
+		\centering
+		\small
+		\begin{tabular}[c]{|l p{1.85in} rrrr p{1.1in}|} % OBS! 4.5in is entire page length % 4.2in gives same length as table 3.2
+			\hline
+			GO ID & Term & Ann & Sign & Exp & weight01 & Genes affected\tabularnewline
+			\hline
+			0000084 & S phase of mitotic cell cycle & 114 & 4 & $0.26$ & $0.00013$ & {\it CDK4}, {\it MCM4}, {\it PSMB4}, {\it PSMD4}\\
+			0006303 & double\hyp{}strand break repair via NHEJ & 10 & 2 & $0.02$ & $0.00023$ & {\it PRKDC}, {\it XRCC6BP1}\\
+			0000216 & M/G1 transition of mitotic cell cycle & 67 & 3 & $0.16$ & $0.00049$ & {\it MCM4}, {\it PSMB4}, {\it PSMD4}\\
+			\hline
+		\end{tabular}
+		\caption{GO terms significantly enriched for genes with LOH-gain and overexpression. GO ID: GO-term ID, Term: GO term, Ann: number of annotated genes, Sig: number of significant genes, Exp: number of genes expected to be significant, weight01: p-value obtained with {\it weight01} algorithm, NHEJ: non\hyp{}homologous end\hyp{}joining.}
+		\label{tab8.1}
+	\end{table}
+%
+
+\subsection{Validation by Sanger sequencing}
+Tumor suppressor genes which are present in a region of LOH and gain may be particularly interesting, because a tumor cell could select for a mutant allele with a partial dominant negative or altered function. We therefore set out to identify mutations in tumor suppressor genes present in these regions of LOH and gain. Yet, false positive regions of LOH may be returned from SNP data analysis in regions of high CN amplification as a technical artifact. Hence, we validated regions of LOH and gain by Sanger sequencing. For validation, we selected the candidate tumor suppressor gene {\it XRCC6BP1}. In addition, we chose to validate the gene {\it LLGL1}, which showed LOH and gain in the SNP data of cell line IOR/OS15 and allelic imbalance and gain in cell line IOR/SARG. We also validated {\it RASD1}, which showed recurrent LOH and gain, but downregulation when compared with osteoblasts. We validated LOH in the cell lines which showed LOH and gain in the particular genes in the SNP data analysis. The selected genes harbored homozygous as well as heterozygous SNPs when analyzed on normal blood donor DNA. Sequencing of the selected SNPs in and around {\it XRCC6BP1} in the cell lines KPD and SAOS-2, and of the SNPs in and around {\it RASD1} in cell lines 143B, HOS, and IOR/OS15 and the diagnostic biopsy L2613 revealed only homozygous SNPs. For {\it LLGL1}, we detected homozygosity in cell line IOR/OS15, but heterozygosity in cell line IOR/SARG, which was detected as allelic imbalance in SNP microarray data analysis. The probabilities for obtaining false positive results in the Sanger sequencing validation were $0.001$, $0.037$, and $0.019$ for {\it XRCC6BP1}, {\it RASD1}, and {\it LLGL1}, respectively. These findings therefore confirm the detection of homozygosity by the SNP microarray data analysis.
+
+\subsection{Nature of the amplification}
+The copy number state of the {\it XRCC6BP1} locus in the affected cell lines was analyzed by FISH (Figure~\ref{fig8.3}).
+%
+\begin{figure}[htbp]
+  \centering
+  \begin{minipage}[b]{0.50\linewidth}
+    \includegraphics[width=1\textwidth]{figs08/fig3rgb.pdf}		% print version pdf version both rgb
+  \end{minipage}
+    \hfill
+  \begin{minipage}[b]{0.46\linewidth}
+     \caption{FISH depicting {\it A}, a control metaphase cell, {\it B}, a metaphase cell of KPD with arrows indicating examples of HSRs, and {\it C}, a metaphase cell of SAOS-2 with arrows indicating {\it XRCC6BP1} alleles not located on chromosome 12. Green: probe for the centromere of chromosome 12, red: BAC probe for {\it XRCC6BP1}.}
+     \label{fig8.3}
+     \end{minipage}
+\end{figure}
+%
+For KPD, 42/50 metaphase cells had four copies of chromosome 12, of which two were negative for the {\it XRCC6BP1} probe. In addition, these cells showed more than ten homogeneous staining regions (HSR) for {\it XRCC6BP1}. 8/50 cells had only two copies of chromosome 12, of which one harbored {\it XRCC6BP1}, and showed 5--10 HSRs per cell. In 50/50 SAOS-2 metaphases, in contrast, we detected two copies of chromosome 12 harboring the {\it XRCC6BP1} locus, and two additional chromosomes without a chromosome 12 centromere, but with signals for {\it XRCC6BP1}. These results do not prove homozygosity of the locus, but do illustrate the different levels of amplification in the different cell lines. These amplifications identified with FISH corresponded to results from the SNP data analysis, as we detected a high gain in KPD and a normal gain in SAOS-2.
+
+\subsection{Mutation analysis of selected genes}
+We performed Sanger sequencing for the entire coding region of {\it XRCC6BP1}, one of the two candidate tumor suppressor genes with recurrent LOH-gain and overexpression, but did not identify any mutation in this gene, indicating that the wild\hyp{}type allele is amplified in the osteosarcoma cell lines KPD and SAOS-2, which harbor the region of LOH and gain. We therefore expanded our list of candidate genes with tumor suppressor genes showing upregulation when compared with MSCs only (2/11 genes may have a tumor suppressive function), and when compared with osteoblasts only (3/5 genes may have a tumor suppressive function). The coding region of {\it PLEKHO1}, which showed overexpression only when compared with osteoblasts, was sequenced and analyzed for mutations in cell lines which showed this aberration---HOS, IOR/MOS, and IOR/SARG. No mutations could be identified, but we were not able to sequence the first exon of this gene. Mutation analysis of {\it TTC19}, which showed overexpression compared to MSCs, revealed a point mutation in exon 7 in the cell line IOR/OS10, but no mutations in the other affected cell lines (143B, HOS, IOR/OS15, IOR/SARG) and in two additionally analyzed diagnostic biopsies showing LOH and gain (L3437, L3469) were detected, indicating that the mutation in {\it TTC19} is not recurrent in osteosarcoma. The mutation, R274G, however, was predicted to be possibly damaging with a score of $0.752$ (sensitivity of $0.85$, specificity of $0.92$) by PolyPhen-2~\cite{adzhubei2010method}.
+
+\section{Discussion}\label{discussion8}
+By analysis of high\hyp{}grade osteosarcoma high\hyp{}throughput genomic data, we demonstrated that, in osteosarcoma, recurrent LOH happens less frequently than copy number aberrations such as gains and losses. Interestingly, we found that LOH was more often accompanied by copy number gains than expected by chance. Tumor suppressor genes showing overexpression in recurrent regions of gain and LOH may be drivers if these genes harbor mutations leading to a gain\hyp{}of\hyp{}function or partial dominant negative function. We thus screened for mutations in candidate tumor suppressor genes in these regions. Of the 29 genes that were recurrently affected in all comparisons, two may have a possible tumor suppressive role---{\it XRCC6BP1} and {\it PRKDC}. We performed mutation analysis for {\it XRCC6BP1}, or XRCC6 binding protein 1 / Ku70 binding protein 3, which is involved in non\hyp{}homologous end\hyp{}joining (NHEJ) of DNA double strand breaks~\cite{yang2011genetic}. {\it XRCC6BP1} has been reported to be amplified and overexpressed in an alternatively spliced isoform in human gliomas, which may interfere with the normal function of the DNA-PK complex~\cite{fischer2001kub3}. In regions of LOH-gain in osteosarcoma cell lines, {\it XRCC6BP1} did not harbor any recurrent mutations. We did not screen for mutations in {\it PRKDC}, or DNA-PK catalytic subunit, a Ser/Thr kinase which also plays a role in NHEJ~\cite{chan2002autophosphorylation}, because of its size (over 13kb). We did analyze two additional genes, {\it PLEKHO1} and {\it TTC19}, which showed recurrent LOH and gain, but which were overexpressed only in comparison with osteoblasts, or only in comparison with MSCs, respectively. No mutations in {\it PLEKHO1} (pleckstrin homology domain containing, family O member 1), a gene with a role in regulation of the actin cytoskeleton~\cite{canton2005pleckstrin} with an inhibitory effect on PI3K/Akt signaling~\cite{tokuda2007casein}, were detected, but we were unable to sequence exon 1 of this gene. We did detect a mutation in {\it TTC19} (tetratricopeptide repeat domain 19), of which the protein is reported to be involved in oxidative phosphorylation in mitochondria~\cite{ghezzi2011mutations}, and which may play a role in cytokinesis as well~\cite{sagona2010ptdins}. The mutation detected results in a arginine to glycine substitution at codon 274 of the TTC19 protein and was predicted as possibly damaging. However, the mutation was only found in 1/6 samples analyzed, and is therefore not recurrent. A shortcoming of these mutation analyses is that only exons were sequenced, and mutations in {\it e.g.} intronic regions may also affect the protein function, for example by affecting alternative splicing. We thus cannot exclude that these genes harbor any recurrent mutations.
+
+A weakness of this study is that we did not have paired control samples available for the SNP microarray data analysis. Using paired control samples helps in avoiding the false\hyp{}positive regions of LOH which are detected when comparing tumor samples with an independent set of controls, because of patient\hyp{}specific inherited segments of homozygosity~\cite{heinrichs2010snp}. A second limitation in the analysis of these data is that high\hyp{}grade osteosarcoma is extremely genomically unstable. Copy number aberrations that are returned by data analysis are relative changes against the background copy number state of the samples, and therefore true copy number states are not uncovered~\cite{gardina2008ploidy}. Regions of copy number gain could, {\it e.g.} in a tetraploid background, consequently represent even higher gains than what is expected based on assumption of a near\hyp{}diploid background. In the case of an unbalanced gain, the detection of the other allele may be low, which can lead to the detection of a false\hyp{}positive region of LOH. Because of these considerations, we validated a selection of genes in regions of recurrent LOH-gain by Sanger sequencing. All regions we tested were indeed detected as homozygous for the all SNPs. However, in a highly amplified region, Sanger sequencing may also not be sensitive enough to detect the sequence of an allele of which only one copy is present. We therefore cannot conclude that these regions are actually homozygous, although for regions of low amplification this is probably the case.
+
+FISH analysis of {\it XRCC6BP1} revealed four copies of chromosome 12 in both cell lines, of which two harbored the {\it XRCC6BP1} locus and two not. In addition, cell line KPD showed numerous homozygous staining regions. These results could be an indication of LOH and amplification of the other allele with intrachromosomal HSRs, but allele\hyp{}specific FISH should be performed to clarify whether these are true cases of LOH. Nevertheless, FISH validated the copy number states that were detected by SNP microarray data analysis, as the gain detected in SAOS-2 was represented by four copies of the gene, and the high gain detected in KPD was represented by $>10$ copies of the {\it XRCC6BP1} locus in FISH, thereby confirming the detection algorithm for copy number gain we used was appropriate for these samples. Chromothripsis, or chromosome scattering, is reported to be present in bone tumors with a frequency of at least 25\%~\cite{stephens2011massive}. In chromothripsis, part of the genome generally oscillates between two states, with the higher copy number state retaining heterozygosity and the lower copy number state showing LOH. The regions of LOH-gain we detected in the osteosarcoma SNP data could represent chromothripsis, since it would be possible that small oscillating regions were not detected due to the density of the probes targeting SNPs on the microarray and the detection algorithm. Such regions may be returned as larger regions of CN gain harboring LOH. A characteristic of chromothripsis is the presence of double minutes---small circular extra-chromosomal DNA fragments, which may be highly amplified in the tumor cell, and which frequently harbor oncogenes in cancer cells~\cite{forment2012chromothripsis}. The HSRs which were detected in cell line KPD may represent chromosomal integration of double minutes, especially considering 17/29 genes detected by our analysis are possible oncogenes. It would thus be interesting to characterize whether the regions that we detected are recurrent HSRs or double minutes, and what the function of these oncogenes is in tumorigenesis of osteosarcoma.
+
+%%% references
+
+\begin{small}
+\begin{singlespace}
+\bibliographystyle{unsrtnatshort}		% sorted as referenced, was unsrtnat, but unsrtnatshort gives shorter output
+\bibliography{biblio}
+\end{singlespace}
+\end{small}
+
+%%% appendix
+% supplemental table 1 and 2 included as additional table 1 and 2
+\begin{subappendices}
+	\newpage
+	\setcounter{table}{0}
+	\section{Additional Tables}
+		\renewcommand{\tablename}{Additional Table}
+		%
+\begin{center}
+\begin{singlespacing}
+   \hvFloat[
+    nonFloat=true,
+    capPos=r, % caption to the right
+    capWidth=w, % caption has size of object
+    capAngle=90,
+    objectAngle=90,
+]{table}{\small
+    \begin{tabular}{|ccccc|}
+	\hline
+    Gene & SNP ID & Population frequencies (\%) & Forward primer & Reverse primer\\
+    \hline
+		{\it XRCC6BP1} & SNP\_A\_8453712 & 45/55 & GCAAGAACCTGTCTCTGAAAAA & GCTGCATAGTATTCCGTGGTG\tabularnewline
+		& SNP\_A\_4194973 & 45/55 & AGACAGTGGTGCAGCTGAGA & GACCACACGGGCTGTTTTAT\tabularnewline
+		& SNP\_A\_1846441 & 50/50 & AACCCCAGAGAAAAACACCA & GTCCCAAGATGCATTGCTTT\tabularnewline
+		& SNP\_A\_2291513 & 45/55 & TCTGGCAGTAATGTGGTGGT & ATTGCTGCTAAGCCAAGGAC\tabularnewline
+		& SNP\_A\_2063148 & 45/55 & TCTGAGCCTAAAACCCAGGA & GCTGGGCAGCTGACTCTAAT\tabularnewline
+		& SNP\_A\_8461882 & 41/59 & AAGCAGGGAAACAGGCTACC & CACACCACAGCTGCAGAATC\tabularnewline
+		& SNP\_A\_8379343 & 48/52 & GGGCTGATGTGGTCTAGGAG & CCCTGCACAGATGTCTACCC\tabularnewline
+		& SNP\_A\_1818707 & 50/50 & AGGTGGGAATATGAAGTTCAGTG & GAGCCACAAGGGTGAGAAGT\tabularnewline
+		& SNP\_A\_8352439 & 46/54 & TGAATCCTGCCTTTCCCATA & CATCCATATAGTTGCTGAAATGC\tabularnewline
+		& SNP\_A\_8552537 & 47/53 & CCATGAACCTTTTGGAAGGA & CTTCATGATGATGGAAGCTCTG\tabularnewline
+		{\it RASD1} & SNP\_A\_2173899 & 25/75 & CCTCCCTCCTGCTTCTTCTT & TGATCAGTGACAACCATCACA\tabularnewline
+		& SNP\_A\_8383260 & 27/73 & CAAGTGTCCATTGCCTGATG & GTGTCCGGCTTCTCTCACTC\tabularnewline
+		& SNP\_A\_8307109 & 27/74 & TTGATGCCATCTCTCAGCAC & AGTGTCCCCAGCAGTGTCTT\tabularnewline
+		& SNP\_A\_1785268 & 44/56 & TTCCAAGGAGCTGGAAGTTG & AGGCACCTTATCCCTTCTCC\tabularnewline
+		& SNP\_A\_2186302 & 10/90 & GCCTTGGTTGTCTCATTTTTG & GCCCTTACCAGTCCATTCCT\tabularnewline
+		& SNP\_A\_8609757 & 25/75 & GATTTGCAAGGTGTGAGACG & GTGGGAAATTTCAACCCAGA\tabularnewline
+		& SNP\_A\_1953953 & 20/80 & GTTAGTGGCCCACCCACTTT &  CCAAATGAAGCCAGGGTCTA\tabularnewline
+		{\it LLGL1} & SNP\_A\_8649983 & 30/70 & AAGTTTGGCCTGAAGCTGTG & TCAGCTCCGTGTGTCTATGG\tabularnewline
+		& SNP\_A\_8287520 & 40/60 & GGGAAGGTCCTGGATTTGTT & CAGGCATGTGAGGTATGTGG \tabularnewline
+		& SNP\_A\_8651023 & 20/80 & CTGTGCATAGGCAGGGTTG & CTGGGTTGGTACTCCCCTTT\tabularnewline
+		& SNP\_A\_8688092 & 40/60 & " & " \tabularnewline
+		& SNP\_A\_1919461 & 15/85 & TCCCAAAGTGCTGGGATTAC & GCAAGGAAATGGCTGTGGTA\tabularnewline
+		& SNP\_A\_8330336 & 40/60 & ATCATACCACTGCCCTCCAG & CCAGACTCATGGATGCAGAA\tabularnewline
+		& SNP\_A\_2043066 & 20/80 & " & "\tabularnewline
+		& SNP\_A\_4253141 & 20/80 & " & "\tabularnewline
+    \hline
+    \end{tabular}%
+}%
+[Caption]{Primer sequences to validate LOH.}{atab8.1}
+\end{singlespacing}
+\end{center}
+%
+\begin{landscape}
+%	\begin{table}[htbp]
+		\centering
+		\small
+		\begin{singlespacing}
+		\begin{longtable}[c]{|cccc|}
+		\hline
+		Gene & Exon & Forward primer & Reverse primer\tabularnewline
+		\hline
+		{\it PLEKHO1} & 2 & TGAAAACCTTTCCGAAGTGG & GCAGATGAGATGGGGGTAGA\tabularnewline
+		& 3 & CCTCTCCTCAGGCTTCCTCT & TGCCTGGAAAGAAGGAAATG\tabularnewline
+		& 4 & GGTGAGGCACCACCTCTAAA & TGGTGGAGGAGCGAGTAAAC\tabularnewline
+		& 5 & TGTCCAGTAAATCCCCTTGC & CCTAATGGGCGCTGAATAAA\tabularnewline
+		& 6.1 & CTGATGACAGGTTCCCCACT & AAGGTCGGGAGAGACTGCTT\tabularnewline
+		& 6.2 & CTGAGAGCTTTCGGGTTGAC & TCCAATTCGATGATGCCTCT\tabularnewline
+		& 6.3 & AGGTTCAGGGACTGGGAGAT & TACGAGGGGCATATGGAAAG\tabularnewline
+		{\it XRCC6BP1} & 1 & CGGGAGGGAGGTTACCTTT & CAGACCCATTCTGTGGAACC\tabularnewline
+		& 2 & CGCCTCAACCTCCTAAAGTG & GTTTTCAGCAGCCAGACCTC\tabularnewline
+		& 3 & TATGGTGGAGGGTCTCCTGA & GCATGTGGAAGATGCTCAAA\tabularnewline
+		& 4 & TCACTGAACTTCTTTTATTTTGGTG & CCGAAATTCAAGACTAAGGTAGAA\tabularnewline
+		& 5 & GAGCATGAGCGTTTATTTCTTTT & ACACTCTGGAGGGGAAGTGA\tabularnewline
+		& 6.1 & GAGCCTCATACTTTTCCTTCTTTTT & TGCCTTGGAGTTTAAAGCAG\tabularnewline
+		& 6.2 & AAACAGAGAAGACTGTGATTCTAGC & CAACAGCTCAATAAGTATCCTACAATG\tabularnewline
+		{\it TTC19} & 1.1 & CAACTGCGCTGTACCGTAAAT & CAGGATCCTCCACAGGTAGG\tabularnewline
+		& 1.2 & GGCAACACTACGGCCATC & AGCTCAGGAGCCGGAACAT\tabularnewline
+		& 1.3 & AGGGCGAGACGGAGTGAC & GAAGGGGCTCTGAGGTCAT\tabularnewline
+		& 2 & GATGACCTCAGAGCCCCTTC & TAGAGTCGGAAAAGCCTGGA\tabularnewline
+		& 3 & CAGTTGGGATGTACAGTTGCAT & CCAACCTTCCTCATCAGTGG\tabularnewline
+		& 4 & TTGAGGGTGAAAGCAAAAGG & TCCCTTGAAGCTACTCCTTCAT\tabularnewline
+		& 5 & GGGGCCCAATTAAAAGAAAA & CTCCACCTTTCCTGACCAAA\tabularnewline
+		& 6 & CCACCGTCAGTCTGGAAGTT & GACACCCAATTTCTGGGAGA\tabularnewline
+		& 7 & CAACAAGAGCGAAACTCCATC & GAAAAGGCAATGCCCAGATA\tabularnewline
+		& 8 & TGGGTCCTGGTAACAACCAT & GGACCATCTGCTGATCCTGT\tabularnewline
+		& 9 & TTGGATGCACTCCACATTAAA & CTTGCCCTCCCTACATACCA\tabularnewline
+		& 10 & CACCAGCTTGTCGCTTCATA & ATGCCCAGAAAACTCCAGTG\tabularnewline
+		\hline
+		\caption{Primer sequences for mutation analysis.}
+		\label{atab8.2}
+		\end{longtable}
+%	\end{table}
+		\end{singlespacing}
+\end{landscape}
+%
+\end{subappendices}
+
+%\end{document}
